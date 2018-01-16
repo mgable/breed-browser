@@ -103,8 +103,6 @@ class LineItem extends Component{
 	}
 
 	handleClick(event) {
-		console.info("I am the event");
-		console.info(event.target.textContent);
 		this.props.setBreed(event.target.textContent);
 	}
 
@@ -118,35 +116,5 @@ class LineItem extends Component{
 		);
 	}
 }
-
-//<SearchField breed={this.state.breed} filterBreeds={this.filterBreeds.bind(this)}></SearchField>
-		  // <SearchField breed={this.state.breed} filterBreeds={this.filterBreeds.bind(this)}></SearchField>
-		// <div className="breed-listing">
-		//   {this.state.breedsList}
-		// </div>
-
-  // return (
-  //   <div>
-  //     <h5>{props.name}</h5>
-  //     <ul>
-  //       {props.items.map((item)=>{
-  //         return <li key={item}><a onClick={(event) => {props.updateIt(event.target.textContent)}}>{item}</a></li>
-  //       })}
-  //     </ul>
-  //   </div>
-  // );
-//}
-
-
-
-
-// function App(props){
-//   return (
-//     <div>
-//       <div>{console.info("hey!!!!")}</div>
-//       <h1>{_formatName(props.name)}!</h1>
-//     </div>
-//   );
-// }
 
 export default App;

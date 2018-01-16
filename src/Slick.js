@@ -77,6 +77,7 @@ class Slick extends Component {
 						})
 					}
 				</Slider>
+				<img className="wait" src="./ajax-loader.gif" />
 			</div>
 		);
 	}
