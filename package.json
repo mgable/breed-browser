@@ -8,6 +8,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
+    "react-slick": "^0.16.0",
     "reactstrap": "^5.0.0-alpha.4",
     "underscore": "^1.8.3"
   },

@@ -5,6 +5,7 @@ import Search from './Search.js';
 import _ from 'underscore';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
+import Slick from "./Slick.js";
 
 window.jQuery = $;
 window.$ = $;
@@ -12,17 +13,17 @@ window.$ = $;
 class App extends Component {
 	constructor(props){
 		super(props);
-		this.state = {breed: props.breed, items: [], images: [], breeds: []};
+		this.state = {breed: props.breed, images: [], breeds: []};
 	}
 
-	updateIt(name){
-		this.setState({name: name});
-		this.getBreedImages(name)
+	updateIt(breed){
+		this.setState({breed});
+		this.getBreedImages(breed);
 	}
 
 	search(){
 		Search.getBreeds().then((response) => {
-			this.setState({breeds: _formatBreedsList(_groupByAlpha(response))});
+			this.setState({breeds: _formatBreedsList(_groupByAlpha(response), this)});
 		});
 	}
 
@@ -36,7 +37,7 @@ class App extends Component {
 
 	getBreedImages(breed){
 		if (breed === "random"){
-			//this.getRandomBreedImages(10);
+			this.getRandomBreedImages(10);
 		} else {
 			Search.getBreedImages(breed).then((breedImages) => {
 				breedImages.length = 10;
@@ -53,23 +54,11 @@ class App extends Component {
 	render(){
 		return (
 			<div className="App">
-				<Display breed={this.state.breed} images={this.state.images} updateIt={this.updateIt.bind(this)}></Display>
-				<Browser breed={this.state.breed} breeds={this.state.breeds} updateIt={this.updateIt.bind(this)}></Browser>
+				<Slick breedImages={this.state.images} breed={this.state.breed}></Slick>
+				<Browser breed={this.state.breed} breeds={this.state.breeds}></Browser>
 			</div>
 		);
 	}
-}
-
-function Display(props){
-	return (
-		<div className="display">
-			<ul>
-				{props.images.map((image) => {
-			    	return <li key={image}><img src={image} /></li>
-				})}
-	  		</ul>
-		</div>
-	);
 }
 
 function Browser(props){
@@ -81,11 +70,7 @@ function Browser(props){
 			</div>
 		</div>
 	);
-}
-
-// {props.breeds.map((breed) => {
-// 						return <li key={breed}>{breed}</li>
-// 					})}			
+}	
 
 function _groupByAlpha(breeds){
 	return _.groupBy(_.map(breeds, function(val, key){
@@ -95,14 +80,14 @@ function _groupByAlpha(breeds){
 	});
 }
 
-function _formatBreedsList(alphaBreedsObj){
+function _formatBreedsList(alphaBreedsObj, props){
 	var index = 0;
 	return _.map(alphaBreedsObj, (breeds, alpha) => {
 		index++;
 		return (
 			<ul className="no-bullets" key={index.toString()}>
 				<li><h2>{alpha.toUpperCase()}</h2></li>
-				<LineItem breeds={breeds}></LineItem>
+				<LineItem breeds={breeds} setBreed={props.updateIt.bind(props)}></LineItem>
 			</ul>
 		);
 	});
@@ -111,9 +96,6 @@ function _formatBreedsList(alphaBreedsObj){
 class LineItem extends Component{
 	constructor(props) {
 		super(props);
-		console.info("line item");
-		console.info(props);
-
 		this.state = {breeds: props.breeds};
 		this.handleClick = this.handleClick.bind(this);
 
@@ -123,7 +105,7 @@ class LineItem extends Component{
 	handleClick(event) {
 		console.info("I am the event");
 		console.info(event.target.textContent);
-		//this.props.setBreed(event.target.textContent);
+		this.props.setBreed(event.target.textContent);
 	}
 
 	render(){
