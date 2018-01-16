@@ -18,32 +18,13 @@ window.$ = $;
 
 class Slick extends Component {
 	constructor(props){
-		console.info('slick!!!');
-		console.info(props);
 		super(props);
-
-		this.state = {/*dogImages: props.breedImages,*/ breed: props.breed};
+		this.state = {breed: props.breed};
 	}
 
-	// componentDidMount() {
-	// 	console.info("here!");
-	// 	Search.getRandomImages(10).then((response) => {
-	// 		this.setState({dogImages: response});
-	// 		console.info("set dog images");
-	// 		console.info(response);
-	// 	}, (error) => {
-	// 		console.error(error);
-	// 	});
- // 	}
-
  	changeImage(breed){
- 		console.info("fiid");
- 		console.info(breed);
  		Search.getBreedImages(breed).then((breedImages) => {
 			breedImages.length = 10;
-			console.info(breedImages);
-			// breeds = breedImages;
-			console.info("rerender");
 			this.setState({dogImages: breedImages});
 		});
  	}
