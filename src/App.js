@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Search from './Search.js';
+import LineItem from './LineItem.js';
+import Browser from './Browser.js';
 import _ from 'underscore';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -84,21 +86,9 @@ class App extends Component {
 	}
 }
 
-function Browser(props){
-	return (
-		<div className="main">
-			<h2>Now showing {props.breed} pictures.</h2>
-			<SearchField breed={props.breed} filterBreeds={props.filterBreeds}></SearchField>
-			<div className="breed-listing">
-				{props.breeds}
-			</div>
-		</div>
-	);
-}	
-
 function _groupByAlpha(breeds){
 	return _.groupBy(_.map(breeds, function(val, key){
-		return {name: key, subbreeds: val}
+		return {name: key, subbreeds: val};
 	}), function(item){
 		return item.name && item.name.charAt(0);
 	});
@@ -115,63 +105,6 @@ function _formatBreedsList(alphaBreedsObj, props){
 			</ul>
 		);
 	});
-}
-
-class LineItem extends Component{
-	constructor(props) {
-		super(props);
-		this.state = {breeds: props.breeds};
-		this.handleClick = this.handleClick.bind(this);
-
-
-	}
-
-	handleClick(event) {
-		this.props.setBreed(event.target.textContent);
-	}
-
-	render(){
-		return (
-			<ul>
-				{this.props.breeds.map((breed) => {
-					return <li onClick={this.handleClick} key={breed.name}>{breed.name}</li>
-				})}
-			</ul>
-		);
-	}
-}
-
-class SearchField extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {breed: props.breed};
-		this.clearSearch = this.clearSearch.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleChange(event) {
-		var value = event.target.value;
-		this.setState({breed: value});
-		this.props.filterBreeds(value);
-	}
-
-	clearSearch(){
-		this.setState({breed: ""});
-		this.props.filterBreeds("");
-	}
-
-	render() {
-		return (
-			<div className="search-wrapper">
-				<form onSubmit={this.handleSubmit}>
-					<label htmlFor="search">Search breeds:&nbsp;
-						<input type="text" name="focus" required className="search-box search" onChange={this.handleChange} id="search" value={this.state.breed} placeholder="search" />
-						<button onClick={this.clearSearch} className="close-icon" type="reset" />
-					</label>
-				</form>
-			</div>
-		);
-	}
 }
 
 export default App;
