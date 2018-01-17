@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import Slider from 'react-slick';
 import './App.css';
 import "../node_modules/slick-carousel/slick/slick.css";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick';
 
 class Slick extends Component {
 	constructor(props){

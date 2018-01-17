@@ -4,5 +4,5 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App breed="random"/>, document.getElementById('breedBrowser'));
+ReactDOM.render(<App />, document.getElementById('breedBrowser'));
 registerServiceWorker();
