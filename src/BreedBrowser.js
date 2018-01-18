@@ -9,7 +9,7 @@ import _ from 'underscore';
 class BreedBrowser extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {breed: "random", images: []};
+		this.state = {breed: "random", images: [], breeds: []};
 		this.filterBreeds = this.filterBreeds.bind(this);
 	}
 
@@ -34,6 +34,7 @@ class BreedBrowser extends React.Component {
 	}
 
 	filterBreeds(input){
+		console.info(input);
 		var bl = {},
 			re = new RegExp(input);
 
@@ -51,7 +52,7 @@ class BreedBrowser extends React.Component {
 		var alphaBreedsObj =_groupByAlpha(list),
 			breedsList = _formatBreedsList(alphaBreedsObj, this);
 
-		return breedsList;
+		this.setState({breeds: breedsList });
 	}
 
 
@@ -67,7 +68,7 @@ class BreedBrowser extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.setBreedsList(this.props.rawBreedsObj);
+		this.search();
 		this.getRandomBreedImages(10);
 	}
 
@@ -75,7 +76,7 @@ class BreedBrowser extends React.Component {
 		return (
 			<div className="App">
 				<Slick breedImages={this.state.images} breed={this.state.breed}></Slick>
-				<Browser breed={this.state.breed} breeds={this.setBreedsList(this.props.rawBreedsObj)} filterBreeds={this.filterBreeds}></Browser>
+				<Browser breed={this.state.breed} breeds={this.state.breeds} filterBreeds={this.filterBreeds}></Browser>
 			</div>
 		);
 	}
