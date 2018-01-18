@@ -8,10 +8,8 @@ import _ from 'underscore';
 
 class BreedBrowser extends React.Component {
 	constructor(props){
-		console.info("breed browser props");
-		console.info(props);
 		super(props);
-		this.state = {breed: "random", images: [], breeds: [], rawBreedsList: props.breeds};
+		this.state = {breed: "random", images: []};
 		this.filterBreeds = this.filterBreeds.bind(this);
 	}
 
@@ -53,7 +51,7 @@ class BreedBrowser extends React.Component {
 		var alphaBreedsObj =_groupByAlpha(list),
 			breedsList = _formatBreedsList(alphaBreedsObj, this);
 
-		this.setState({breeds: breedsList});
+		return breedsList;
 	}
 
 
@@ -69,7 +67,7 @@ class BreedBrowser extends React.Component {
 	}
 
 	componentDidMount() {
-		this.search();
+		// this.setBreedsList(this.props.rawBreedsObj);
 		this.getRandomBreedImages(10);
 	}
 
@@ -77,7 +75,7 @@ class BreedBrowser extends React.Component {
 		return (
 			<div className="App">
 				<Slick breedImages={this.state.images} breed={this.state.breed}></Slick>
-				<Browser breed={this.state.breed} breeds={this.state.breeds} filterBreeds={this.filterBreeds}></Browser>
+				<Browser breed={this.state.breed} breeds={this.setBreedsList(this.props.rawBreedsObj)} filterBreeds={this.filterBreeds}></Browser>
 			</div>
 		);
 	}

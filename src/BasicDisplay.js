@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Route, Link
+  Route
 } from 'react-router-dom';
 
 import BreedBrowser from './BreedBrowser.js';
@@ -28,7 +28,7 @@ class BasicDisplay extends React.Component{
    return (
       <section className="py-5">
         <div className="container">
-          <Route exact path="/" render={() => <BreedBrowser breeds={this.state.breeds}/> } />
+          <Route exact path="/" render={() => <BreedBrowser rawBreedsObj={this.state.breeds}/> } />
           <Route path="/about" component={About}/>
           <Route path="/quiz" render={() => <Quiz breeds={this.state.breeds}/> } />
         </div>
@@ -71,11 +71,11 @@ const About = () => (
 //   </div>
 // )
 
-const Topic = ({ match }) => (
-  <div className="container">
-    <h3>{match.params.topicId}</h3>
-  </div>
-)
+// const Topic = ({ match }) => (
+//   <div className="container">
+//     <h3>{match.params.topicId}</h3>
+//   </div>
+// )
 
 
 export default BasicDisplay;

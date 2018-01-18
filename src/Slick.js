@@ -32,14 +32,7 @@ class Slick extends Component {
 				<Slider {...settings}>
 					{
 						this.props.breedImages.map((image) => {
-							var itemStyle = {
-								color: 'white',
-								backgroundImage: 'url(' + image + ')',
-								WebkitTransition: 'all', // note the capital 'W' here
-								msTransition: 'all' // 'ms' is the only lowercase vendor prefix
-							};
-							// return <div key={image} className="carousel-item active" style={itemStyle}></div>
-							return <img src={image} className="carousel-item active" />
+							return <img alt="dog" key={image} src={image} className="carousel-item active" />
 						})
 					}
 				</Slider>
