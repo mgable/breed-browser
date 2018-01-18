@@ -20,9 +20,9 @@ class Nav extends React.Component{
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto" onClick={this.doIt}>
-              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/">Breeds</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/quiz">Quiz</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/topics">Topics</Link></li>
             </ul>
           </div>
         </div>

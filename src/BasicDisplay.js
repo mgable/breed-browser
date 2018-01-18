@@ -13,7 +13,7 @@ class BasicDisplay extends React.Component{
         <div className="container">
           <Route exact path="/" component={BreedBrowser}/>
           <Route path="/about" component={About}/>
-          <Route path="/topics" component={Topics}/>
+          <Route path="/quiz" component={Quiz}/>
         </div>
       </section>
     );
@@ -26,7 +26,7 @@ const About = () => (
   </div>
 )
 
-const Topics = ({ match }) => (
+const Quiz = ({ match }) => (
   <div>
     <h2>Topics</h2>
     <ul>
