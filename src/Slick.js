@@ -11,7 +11,7 @@ class Slick extends Component {
 	}
 
 	render () {
-		var settings = {"infinite":true, "slidesToShow":3, "slidesToScroll":3, "arrows": true, "autoplay": true, "responsive": [{
+		var settings = {"lazyLoad": 'ondemand', "slidesToShow":3, "slidesToScroll":3, "arrows": true, "autoplay": true, "responsive": [{
 			"breakpoint":640,
 			"settings": {
 				"arrows": false,
@@ -19,9 +19,13 @@ class Slick extends Component {
 				"infinite": true,
 				"slidesToShow": 1,
 				"slidesToScroll": 1,
-				"autoplay": true
+				"autoplay": true,
+				"lazyLoad": 'ondemand'
 			}
 		}]};
+
+		// var settings = {"slidesToShow":1, "slidesToScroll":1,"lazyLoad": true}
+
 
 		return (
 			<div className="slick">
@@ -34,7 +38,8 @@ class Slick extends Component {
 								WebkitTransition: 'all', // note the capital 'W' here
 								msTransition: 'all' // 'ms' is the only lowercase vendor prefix
 							};
-							return <div key={image} className="carousel-item active" style={itemStyle}></div>
+							// return <div key={image} className="carousel-item active" style={itemStyle}></div>
+							return <img src={image} className="carousel-item active" />
 						})
 					}
 				</Slider>
