@@ -44,7 +44,6 @@ h1 {
   padding: 10px;
 }
 .search-wrapper {
-  width: 500px;
   margin: auto;
 }
 .search-box {
@@ -136,6 +135,9 @@ h1 {
     position: relative; 
     height: 300px;
     min-height: 300px;}
+    .testApp .slick .slick-slider {
+      height: 300px;
+      min-height: 300px;}
     .testApp .slick .wait {
       position: absolute;
       top: 50%;

@@ -5,16 +5,32 @@ import {
 
 import BreedBrowser from './BreedBrowser.js';
 import Quiz from './quiz/Quiz.js';
+import Search from './Search.js';
 
 
 class BasicDisplay extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {breeds: []};
+  }
+
+  search(){
+    Search.getBreeds().then((response) => {
+      this.setState({breeds:response});
+    });
+  }
+
+  componentDidMount() {
+    this.search();
+  }
+
   render() {
    return (
       <section className="py-5">
         <div className="container">
-          <Route exact path="/" component={BreedBrowser}/>
+          <Route exact path="/" render={() => <BreedBrowser breeds={this.state.breeds}/> } />
           <Route path="/about" component={About}/>
-          <Route path="/quiz" component={Quiz}/>
+          <Route path="/quiz" render={() => <Quiz breeds={this.state.breeds}/> } />
         </div>
       </section>
     );

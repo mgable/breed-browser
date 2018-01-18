@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from './SearchField.js';
+import './Browser.css';
 
 class Browser extends Component {
 	render(){

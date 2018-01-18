@@ -5,6 +5,7 @@ import Nav from './Nav.js';
 import Footer from './Footer.js';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 class App extends Component {
 	render(){

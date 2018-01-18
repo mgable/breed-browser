@@ -8,8 +8,10 @@ import _ from 'underscore';
 
 class BreedBrowser extends React.Component {
 	constructor(props){
+		console.info("breed browser props");
+		console.info(props);
 		super(props);
-		this.state = {breed: "random", images: [], breeds: [], rawBreedsList: []};
+		this.state = {breed: "random", images: [], breeds: [], rawBreedsList: props.breeds};
 		this.filterBreeds = this.filterBreeds.bind(this);
 	}
 

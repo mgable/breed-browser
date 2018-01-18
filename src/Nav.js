@@ -3,11 +3,22 @@ import {
   Link
 } from 'react-router-dom'
 
+import $ from "jquery";
+
 class Nav extends React.Component{
 
-  doIt(evt){
-    console.info("doing it");
+  constructor(props){
+    super(props);
+    this.clickHandler = this.close.bind(this);
+  }
+
+
+  close(evt){
+      console.info("doing it");
     console.info(evt);
+    var target = $("#navbarResponsive")
+    target.addClass('collapsing');
+    target.removeClass('show');
   }
 
   render() {
@@ -19,7 +30,7 @@ class Nav extends React.Component{
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto" onClick={this.doIt}>
+            <ul className="navbar-nav ml-auto" onClick={this.close}>
               <li className="nav-item"><Link className="nav-link" to="/">Breeds</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/quiz">Quiz</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
