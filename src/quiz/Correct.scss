@@ -1,0 +1,12 @@
+.quiz {
+	width: 325px;
+	margin: auto;
+	.answers .answer .correct  {
+		.yes {
+			color: green;
+		}
+		.no {
+			color: red;
+		}
+	}
+}

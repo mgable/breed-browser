@@ -1,0 +1,158 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 20px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+body {
+  background-color: #f1f1f1;
+  font-family: Helvetica,Arial,Verdana;
+
+}
+h1 {
+  color: green;
+  text-align: center;
+}
+.redfamily {
+  color: red; 
+}
+.search-box,.close-icon,.search-wrapper {
+  position: relative;
+  padding: 10px;
+}
+.search-wrapper {
+  width: 500px;
+  margin: auto;
+}
+.search-box {
+  width: 80%;
+  border: 1px solid #ccc;
+  outline: 0;
+  border-radius: 15px;
+}
+.search-box:focus {
+  box-shadow: 0 0 15px 5px #b0e0ee;
+  border: 2px solid #bebede;
+}
+.close-icon {
+  border:1px solid transparent;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-icon:after {
+  content: "X";
+  display: block;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: #FA9595;
+  z-index:1;
+  right: 35px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 2px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: normal;
+  font-size: 12px;
+  box-shadow: 0 0 2px #E50F0F;
+  cursor: pointer;
+}
+
+.close-icon:focus {
+  outline: 0;
+}
+
+.search-box:not(:valid) ~ .close-icon {
+  display: none;
+}
+
+
+ ul ul {
+  margin: 0;
+  padding: 0;
+ }
+
+.testApp {
+  background-color: white; }
+  .testApp header {
+    margin: 56px 0 20px 0;
+    min-height: 65vh; }
+  .testApp .container .main .search {
+    border-color: lightgray; }
+  .testApp .container .main .no-bullets {
+    padding-left: 0;
+    padding-right: 20px;
+    margin-right: 10px; }
+    .testApp .container .main .no-bullets li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; 
+      text-align: left;
+    }
+  .testApp .container .main .breed-listing {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 500px; }
+    .testApp .container .main .breed-listing ul li {
+      cursor: pointer; }
+    @media (max-width: 991px) {
+      .testApp .container .main .breed-listing {
+        height: 820px; } }
+    @media (max-width: 640px) {
+      .testApp .container .main .breed-listing {
+        height: 1600px; } }
+  .testApp .slick {
+    position: relative; 
+    height: 300px;
+    min-height: 300px;}
+    .testApp .slick .wait {
+      position: absolute;
+      top: 50%;
+      z-index: -1; }
+    .testApp .slick .carousel-item {
+      height: 300px;
+      background: no-repeat center center scroll;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; }
+    .testApp .slick .slick-prev {
+      left: 0;
+      z-index: 10; }
+    .testApp .slick .slick-next {
+      right: 0; }
+    .testApp .slick .slick-slider {
+      margin-bottom: 0; }
+
+/*# sourceMappingURL=main.css.map */
