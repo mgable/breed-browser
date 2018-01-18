@@ -6,7 +6,7 @@ import Search from './Search.js';
 import _ from 'underscore';
 
 
-class Display extends React.Component {
+class BreedBrowser extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {breed: "random", images: [], breeds: [], rawBreedsList: []};
@@ -68,7 +68,7 @@ class Display extends React.Component {
 
 	componentDidMount() {
 		this.search();
-		this.getRandomBreedImages(10)
+		this.getRandomBreedImages(10);
 	}
 
 	render(){
@@ -102,4 +102,4 @@ function _formatBreedsList(alphaBreedsObj, props){
 	});
 }
 
-export default Display;
+export default BreedBrowser;

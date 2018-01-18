@@ -3,7 +3,7 @@ import {
   Route, Link
 } from 'react-router-dom';
 
-import Display from './Display.js';
+import BreedBrowser from './BreedBrowser.js';
 
 
 class BasicDisplay extends React.Component{
@@ -11,7 +11,7 @@ class BasicDisplay extends React.Component{
    return (
       <section className="py-5">
         <div className="container">
-          <Route exact path="/" component={Display}/>
+          <Route exact path="/" component={BreedBrowser}/>
           <Route path="/about" component={About}/>
           <Route path="/topics" component={Topics}/>
         </div>
@@ -21,7 +21,7 @@ class BasicDisplay extends React.Component{
 }
 
 const About = () => (
-  <div>
+  <div className="container">
     <h2>About</h2>
   </div>
 )
@@ -55,7 +55,7 @@ const Topics = ({ match }) => (
 )
 
 const Topic = ({ match }) => (
-  <div>
+  <div className="container">
     <h3>{match.params.topicId}</h3>
   </div>
 )
