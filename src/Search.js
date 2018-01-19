@@ -7,31 +7,36 @@ import $ from 'jquery';
 
 
  	function getBreeds(){
- 		return _http("breeds/list/all", {}).then(function(response){
+ 		return _http("breeds/list/all", {}).then((response) => {
  			return response.message;
  		});
  	}
 
  	function getRandomImage(){
- 		return _http("breeds/image/random", {}).then(function(response){
+ 		return _http("breeds/image/random", {}).then((response) => {
+ 			return response.message;
+ 		});
+ 	}
+
+ 	function getRandomBreedImage(breed){
+ 		return _http(`breed/${breed}/images/random`, {}).then((response) =>{
  			return response.message;
  		});
  	}
 
  	function getBreedImages(breed){
- 		return _http(`breed/${breed}/images`, {}).then(function(response){
+ 		return _http(`breed/${breed}/images`, {}).then((response) => {
  			return response.message;
  		});
  	}
 
  	function _http(endpoint, params){
- 		return $http(domain + endpoint, {params:params}, function(response){
+ 		return $http(domain + endpoint, {params:params}, (response) =>{
  			return response;
  		});
  	}
 
  	function getRandomImages(howMany){
-
  		return new Promise(function(resolve, reject){
  			_getImage(howMany, []);
 
@@ -52,6 +57,7 @@ import $ from 'jquery';
  	exports.getRandomImage = getRandomImage;
  	exports.getRandomImages = getRandomImages;
  	exports.getBreedImages = getBreedImages;
+ 	exports.getRandomBreedImage = getRandomBreedImage;
 
  	export default exports;
 

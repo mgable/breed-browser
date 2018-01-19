@@ -52,6 +52,7 @@ class BreedBrowser extends React.Component {
 		var alphaBreedsObj =_groupByAlpha(list),
 			breedsList = _formatBreedsList(alphaBreedsObj, this);
 
+		// return breedsList;
 		this.setState({breeds: breedsList });
 	}
 

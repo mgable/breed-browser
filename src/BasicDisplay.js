@@ -28,9 +28,9 @@ class BasicDisplay extends React.Component{
    return (
       <section className="py-5">
         <div className="container">
-          <Route exact path="/" render={() => <BreedBrowser rawBreedsObj={this.state.breeds}/> } />
+          <Route exact path="/" render={() => <BreedBrowser/> } />
           <Route path="/about" component={About}/>
-          <Route path="/quiz" render={() => <Quiz breeds={this.state.breeds}/> } />
+          <Route path="/quiz" render={() => <Quiz rawBreedsObj={this.state.breeds}/> } />
         </div>
       </section>
     );

@@ -14,11 +14,14 @@ class Nav extends React.Component{
 
 
   close(evt){
-      console.info("doing it");
+    console.info("doing it");
     console.info(evt);
     var target = $("#navbarResponsive")
-    target.addClass('collapsing');
-    target.removeClass('show');
+    
+    if (target.hasClass('show')){
+       target.removeClass('show');
+    }
+   
   }
 
   render() {
