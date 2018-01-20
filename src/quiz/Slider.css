@@ -1,0 +1,10 @@
+.slider {
+  position: relative; }
+  .slider .wait {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1; }
+  .slider .image-holder {
+    height: 300px;
+    background-size: cover; }

@@ -5,20 +5,26 @@ import './Correct.css'
 
 class Correct extends Component{
 	render(){
-		return(
-			<span className="correct">
-				<span className="yes">
-					   <FontAwesome
-							className='check'
-							name='check'
-					    />
-				</span>
-				<span className="no">
+		var correct = null;
+		if (this.props.correct ){
+			correct = <span className="yes">
+						   <FontAwesome
+								className='check'
+								name='check'
+						    />
+					</span>
+		} else if (this.props.correct === false){
+			correct = <span className="no">
 					<FontAwesome
 						className='times'
 						name='times'
 					/>
 				</span>
+		}
+
+		return(
+			<span className="correct">
+				{correct}
 			</span>
 		);
 	}

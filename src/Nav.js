@@ -14,8 +14,6 @@ class Nav extends React.Component{
 
 
   close(evt){
-    console.info("doing it");
-    console.info(evt);
     var target = $("#navbarResponsive")
     
     if (target.hasClass('show')){
