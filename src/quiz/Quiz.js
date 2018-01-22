@@ -14,14 +14,12 @@ class Quiz extends Component{
 	search(breed){
 		if(breed){
 			Search.getRandomBreedImage(breed).then((image) => {
-				console.info(image);
 				this.setState({breedImage: image})
 			});
 		}
 	}
 
 	componentDidMount() {
-		console.info("quiz componentDidMount");
 		var rawBreedsList = Object.keys(this.props.rawBreedsObj),
 			breed = _pickRandomBreed(rawBreedsList),
 			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
@@ -31,7 +29,6 @@ class Quiz extends Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.info("quiz componentWillReceiveProps");
 		var rawBreedsList = Object.keys(nextProps.rawBreedsObj),
 			breed = _pickRandomBreed(rawBreedsList),
 			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
