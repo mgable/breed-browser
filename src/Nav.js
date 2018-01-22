@@ -19,7 +19,6 @@ class Nav extends React.Component{
     if (target.hasClass('show')){
        target.removeClass('show');
     }
-   
   }
 
   render() {

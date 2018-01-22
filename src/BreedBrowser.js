@@ -68,13 +68,9 @@ class BreedBrowser extends React.Component {
 	}
 
 	componentDidMount() {
+		console.info("breed Browser componentDidMount");
 		this.search(this.props.rawBreedsObj);
 		this.getRandomBreedImages(10);
-	}
-
-	componentWillReceiveProps(nextProps){
-		this.search(nextProps.rawBreedsObj);
-		this.setState({rawBreedsObj: nextProps.rawBreedsObj});
 	}
 
 	render(){
