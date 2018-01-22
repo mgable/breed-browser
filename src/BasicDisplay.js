@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Route
 } from 'react-router-dom';
-
+import About from './About.js';
 import BreedBrowser from './BreedBrowser.js';
 import Quiz from './quiz/Quiz.js';
 import Search from './Search.js';
@@ -42,12 +42,6 @@ class BasicDisplay extends React.Component{
    }
   }
 }
-
-const About = () => (
-  <div className="container">
-    <h2>About</h2>
-  </div>
-)
 
 // const Quiz = ({ match }) => (
 //   <div>
