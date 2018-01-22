@@ -7,8 +7,9 @@ import './Quiz.css';
 
 class Quiz extends Component{
 	constructor(props){
+		console.info("quiz inited");
 		super(props);
-		this.state = {breedImage: "", breed: ""}
+		this.state = {breedImage: "", breed: "", }
 	}
 
 	search(breed){
@@ -20,33 +21,35 @@ class Quiz extends Component{
 	}
 
 	componentDidMount() {
-		var rawBreedsList = Object.keys(this.props.rawBreedsObj),
-			breed = _pickRandomBreed(rawBreedsList),
-			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
+		console.info("Quiz componentDidMount");
 
-		this.setState({breed, otherBreeds});
-		this.search(breed);
-	}
+		if (this.props && this.props.rawBreedsObj && !_.isEmpty(this.props.rawBreedsObj)){
+			var rawBreedsList = Object.keys(this.props.rawBreedsObj),
+				breed = _pickRandomBreed(rawBreedsList),
+				otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
 
-	componentWillReceiveProps(nextProps){
-		var rawBreedsList = Object.keys(nextProps.rawBreedsObj),
-			breed = _pickRandomBreed(rawBreedsList),
-			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
-		
-		this.setState({breed, otherBreeds});
-		this.search(breed);
+			this.setState({breed, otherBreeds});
+			this.search(breed);
+		}
 	}
 
 	render() {
-		return (
-			<div className="quiz">
-				<h1>Quiz</h1>
-				<Slider breedImage={this.state.breedImage}></Slider>
-				<Answers otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
-			</div>
-		);
+		if(this.state.breedImage && this.state.otherBreeds && this.state.breed){
+		console.info("quiz rendered");
+			return (
+				<div className="quiz">
+					<h1>Quiz</h1>
+					<Slider breedImage={this.state.breedImage}></Slider>
+					<Answers otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
+				</div>
+			);
+		} else {
+			return null;
+		}
 	}
 }
+
+
 
 function _pickRandomBreed(rawBreedsList, howMany = 1, omit){
 	var results = [],
@@ -57,7 +60,9 @@ function _pickRandomBreed(rawBreedsList, howMany = 1, omit){
 	}
 
 	while(total--){
-	 results.push(rawBreedsList[Math.floor((Math.random() * rawBreedsList.length))]);
+		var index = Math.floor((Math.random() * rawBreedsList.length)),
+			item = rawBreedsList.splice(index, 1);
+		results.push(item[0]);
 	}
 
 	if (howMany === 1){

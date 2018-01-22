@@ -6,12 +6,13 @@ import {
 import BreedBrowser from './BreedBrowser.js';
 import Quiz from './quiz/Quiz.js';
 import Search from './Search.js';
+import _ from 'underscore';
 
 
 class BasicDisplay extends React.Component{
   constructor(props){
     super(props);
-    this.state = {breeds: []};
+    this.state = {breeds: {}};
   }
 
   search(){
@@ -25,15 +26,20 @@ class BasicDisplay extends React.Component{
   }
 
   render() {
-   return (
-      <section className="py-5">
-        <div className="container">
-          <Route exact path="/" render={() => <BreedBrowser rawBreedsObj={this.state.breeds}/> } />
-          <Route path="/about" component={About} />
-          <Route path="/quiz" render={() => <Quiz rawBreedsObj={this.state.breeds} /> } />
-        </div>
-      </section>
-    );
+    var shouldRender = !_.isEmpty(this.state.breeds);
+    if (shouldRender){
+     return (
+        <section className="py-5">
+          <div className="container">
+            <Route exact path="/" render={() => <BreedBrowser rawBreedsObj={this.state.breeds}/> } />
+            <Route path="/about" component={About} />
+            <Route path="/quiz" render={() => <Quiz rawBreedsObj={this.state.breeds} /> } />
+          </div>
+        </section>
+      );
+   } else {
+    return null;
+   }
   }
 }
 

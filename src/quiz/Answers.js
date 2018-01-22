@@ -5,15 +5,13 @@ import './Answers.css';
 
 class Answers extends Component{
 	constructor(props){
+		console.info("answers initied");
 		super(props);
 		this.state = {answers: [], correct: "", userResponse: null};
 	}
 
 	makeQuestions(props){
-		console.info("here!");
 		if (props.otherBreeds.length && props.breed){
-			console.info("I have the answers");
-			console.info(props);
 			var answers = props.otherBreeds.slice(0);
 			answers.push(props.breed);
 			answers = _.shuffle(answers);
@@ -26,21 +24,27 @@ class Answers extends Component{
 		this.setState({userResponse: selectedAnswer});
 	}
 
-	componentWillReceiveProps(props){
-		this.makeQuestions(props);
+	componentDidMount(){
+		console.info("componentDidMoun: receving");
+		this.makeQuestions(this.props);
 	}
 
 	render(){
-		return(
-			<div className="answers">
-				<h3 className="title">Answers</h3>
-				<ul>
-					{this.state.answers.map((answer) => {
-						return <Answer key={answer} answer={answer} correct={this.state.correct} isCorrectAnswer={this.isCorrectAnswer.bind(this)} userResponse={this.state.userResponse}></Answer>
-					})}
-				</ul>
-			</div>
-		);
+		if((this.state.answers && this.state.answers.length && this.state.correct) || this.state.userResponse){
+			console.info("Answers rendering");
+			return(
+				<div className="answers">
+					<h3 className="title">Answers</h3>
+					<ul>
+						{this.state.answers.map((answer) => {
+							return <Answer key={answer} answer={answer} correct={this.state.correct} isCorrectAnswer={this.isCorrectAnswer.bind(this)} userResponse={this.state.userResponse}></Answer>
+						})}
+					</ul>
+				</div>
+			);
+		} else {
+			return null;
+		}
 	}
 }
 
