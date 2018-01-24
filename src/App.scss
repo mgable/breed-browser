@@ -64,6 +64,8 @@ h1 {
   outline: 0;
   cursor: pointer;
   line-height: 1;
+  position: relative;
+  right: 35px;
 }
 .close-icon:after {
   content: "X";
@@ -73,7 +75,7 @@ h1 {
   position: absolute;
   background-color: #FA9595;
   z-index:1;
-  right: 35px;
+  right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
