@@ -3,7 +3,8 @@ import $ from 'jquery';
 	var exports = {}
 
 	var domain = "https://dog.ceo/api/",
-		$http =  $.get;
+		$http =  $.get,
+		counter = 0;
 
 
  	function getBreeds(){
@@ -13,7 +14,7 @@ import $ from 'jquery';
  	}
 
  	function getRandomImage(){
- 		return _http("breeds/image/random", {}).then((response) => {
+ 		return _http(`breeds/image/random?=${counter++}`, {}).then((response) => {
  			return response.message;
  		});
  	}
