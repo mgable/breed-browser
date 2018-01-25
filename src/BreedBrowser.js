@@ -13,16 +13,20 @@ class BreedBrowser extends React.Component {
 		this.filterBreeds = this.filterBreeds.bind(this);
 	}
 
-	updateIt(breed){
+	updateIt(breed, event){
+		console.info("looing for ");
+		console.info(breed);
+		if (event){
+			event.preventDefault();
+			event.stopPropagation();
+		}
 		this.setState({breed});
 		this.getBreedImages(breed);
 	}
 
 	search(response){
-		// Search.getBreeds().then((response) => {
-			this.setState({rawBreedsList: response});
-			this.setState({breeds: _formatBreedsList(_groupByAlpha(response), this)});
-		// });
+		this.setState({rawBreedsList: response});
+		this.setState({breeds: _formatBreedsList(_groupByAlpha(response), this)});
 	}
 
 	getRandomBreedImages(howMany){

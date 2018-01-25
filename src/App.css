@@ -135,6 +135,9 @@ ul ul {
   position: relative;
   height: 300px;
   min-height: 300px; }
+  @media (max-width: 640px) {
+    .testApp .slick {
+      margin: 0 0 20px 0; } }
 
 .testApp .slick .slick-slider {
   height: 300px;

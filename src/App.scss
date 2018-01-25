@@ -136,7 +136,10 @@ h1 {
   .testApp .slick {
     position: relative; 
     height: 300px;
-    min-height: 300px;}
+    min-height: 300px;
+    @media (max-width: 640px) {
+        margin: 0 0 20px 0;
+    }}
     .testApp .slick .slick-slider {
       height: 300px;
       min-height: 300px;}
