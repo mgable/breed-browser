@@ -9,19 +9,27 @@ import _ from 'underscore';
 class BreedBrowser extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {breed: "random", images: [], breeds: [], rawBreedsObj: {}};
+		this.state = {breed: "random", images: [], breeds: [], rawBreedsObj: {}, sub: ""};
 		this.filterBreeds = this.filterBreeds.bind(this);
 	}
 
-	updateIt(breed, event){
-		console.info("looing for ");
+	updateIt(breed, sub){
+		console.info("looing for breed");
 		console.info(breed);
-		if (event){
-			event.preventDefault();
-			event.stopPropagation();
+		// console.info(event);
+		// if (event){
+		// 	event.preventDefault();
+		// 	event.stopPropagation();
+		// }
+		if (sub && typeof sub === "string"){
+			console.info("looking for sub breed");
+			console.info(sub);
+			this.setState({sub});
+		} else {
+			sub = false;
 		}
 		this.setState({breed});
-		this.getBreedImages(breed);
+		this.getBreedImages(breed, sub);
 	}
 
 	search(response){
@@ -60,9 +68,14 @@ class BreedBrowser extends React.Component {
 	}
 
 
-	getBreedImages(breed){
+	getBreedImages(breed, sub){
 		if (breed === "random"){
 			this.getRandomBreedImages(10);
+		} else if (sub){
+			Search.getSubBreedImages(sub, breed).then((breedImages) => {
+				breedImages.length = 10;
+				this.setState({images: breedImages});
+			});
 		} else {
 			Search.getBreedImages(breed).then((breedImages) => {
 				breedImages.length = 10;
@@ -72,7 +85,6 @@ class BreedBrowser extends React.Component {
 	}
 
 	componentDidMount() {
-		console.info("breed Browser componentDidMount");
 		this.search(this.props.rawBreedsObj);
 		this.getRandomBreedImages(10);
 	}
@@ -81,7 +93,7 @@ class BreedBrowser extends React.Component {
 		return (
 			<div className="App">
 				<Slick breedImages={this.state.images} breed={this.state.breed}></Slick>
-				<Browser breed={this.state.breed} breeds={this.state.breeds} filterBreeds={this.filterBreeds}></Browser>
+				<Browser sub={this.state.sub} breed={this.state.breed} breeds={this.state.breeds} filterBreeds={this.filterBreeds}></Browser>
 			</div>
 		);
 	}

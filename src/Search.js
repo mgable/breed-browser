@@ -25,6 +25,12 @@ import $ from 'jquery';
  		});
  	}
 
+ 	function getSubBreedImages(breed, sub){
+ 		return _http(`breed/${breed}/${sub}/images`, {}).then((response) => {
+ 			return response.message;
+ 		});
+ 	}
+
  	function getBreedImages(breed){
  		return _http(`breed/${breed}/images`, {}).then((response) => {
  			return response.message;
@@ -59,6 +65,7 @@ import $ from 'jquery';
  	exports.getRandomImages = getRandomImages;
  	exports.getBreedImages = getBreedImages;
  	exports.getRandomBreedImage = getRandomBreedImage;
+ 	exports.getSubBreedImages = getSubBreedImages;
 
  	export default exports;
 

@@ -6,7 +6,7 @@ class Browser extends Component {
 	render(){
 		return (
 			<div className="main">
-				<h2>Now showing {this.props.breed} pictures.</h2>
+				<h2>Now showing {this.props.breed} {this.props.sub} pictures.</h2>
 				<SearchField breed={this.props.breed} filterBreeds={this.props.filterBreeds}></SearchField>
 				<div className="breed-listing">
 					{this.props.breeds}
