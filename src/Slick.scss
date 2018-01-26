@@ -1,0 +1,15 @@
+.slick-prev:before, .slick-next:before {
+	font: {
+		family: 'fontawesome';
+		size: 32px;
+	}
+	content: "\F1B0";
+}
+
+.slick-prev {
+	left: 20px;
+}
+
+.slick-next {
+	right: 20px;
+}

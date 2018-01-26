@@ -70,15 +70,15 @@ class BreedBrowser extends React.Component {
 
 	getBreedImages(breed, sub){
 		if (breed === "random"){
-			this.getRandomBreedImages(10);
+			this.getRandomBreedImages(12);
 		} else if (sub){
 			Search.getSubBreedImages(sub, breed).then((breedImages) => {
-				breedImages.length = 10;
+				breedImages.length = 12;
 				this.setState({images: breedImages});
 			});
 		} else {
 			Search.getBreedImages(breed).then((breedImages) => {
-				breedImages.length = 10;
+				breedImages.length = 12;
 				this.setState({images: breedImages});
 			});
 		}
@@ -86,7 +86,7 @@ class BreedBrowser extends React.Component {
 
 	componentDidMount() {
 		this.search(this.props.rawBreedsObj);
-		this.getRandomBreedImages(10);
+		this.getRandomBreedImages(12);
 	}
 
 	render(){

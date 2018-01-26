@@ -156,11 +156,7 @@ ul ul {
   background-size: cover; }
 
 .testApp .slick .slick-prev {
-  left: 0;
   z-index: 10; }
-
-.testApp .slick .slick-next {
-  right: 0; }
 
 .testApp .slick .slick-slider {
   margin-bottom: 0; }

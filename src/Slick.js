@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
-import './App.css';
+import FontAwesome from 'react-fontawesome';
+import 'font-awesome/css/font-awesome.css';
 import "../node_modules/slick-carousel/slick/slick.css";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
+import './App.css';
+import './Slick.css';
 
 class Slick extends Component {
 	constructor(props){
