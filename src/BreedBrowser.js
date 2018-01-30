@@ -14,16 +14,7 @@ class BreedBrowser extends React.Component {
 	}
 
 	updateIt(breed, sub){
-		console.info("looing for breed");
-		console.info(breed);
-		// console.info(event);
-		// if (event){
-		// 	event.preventDefault();
-		// 	event.stopPropagation();
-		// }
 		if (sub && typeof sub === "string"){
-			console.info("looking for sub breed");
-			console.info(sub);
 			this.setState({sub});
 		} else {
 			sub = false;

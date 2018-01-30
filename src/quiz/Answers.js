@@ -22,6 +22,7 @@ class Answers extends Component{
 	isCorrectAnswer(response){
 		var selectedAnswer = response.target.value;
 		this.setState({userResponse: selectedAnswer});
+		this.props.advance();
 	}
 
 	componentDidMount(){
@@ -29,9 +30,15 @@ class Answers extends Component{
 		this.makeQuestions(this.props);
 	}
 
+	componentWillReceiveProps(nextProps){
+		console.info("componentWillReceiveProps");
+		this.makeQuestions(nextProps);
+	}
+
 	render(){
 		if((this.state.answers && this.state.answers.length && this.state.correct) || this.state.userResponse){
 			console.info("Answers rendering");
+			console.info(this.state.answers);
 			return(
 				<div className="answers">
 					<h3 className="title">Answers</h3>

@@ -9,13 +9,13 @@ class Quiz extends Component{
 	constructor(props){
 		console.info("quiz inited");
 		super(props);
-		this.state = {breedImage: "", breed: "", }
+		this.state = {breedImage: "", breed: "", quiz:[]}
 	}
 
 	search(breed){
 		if(breed){
-			Search.getRandomBreedImage(breed).then((image) => {
-				this.setState({breedImage: image})
+			return Search.getRandomBreedImage(breed).then((image) => {
+				return image;
 			});
 		}
 	}
@@ -24,32 +24,61 @@ class Quiz extends Component{
 		console.info("Quiz componentDidMount");
 
 		if (this.props && this.props.rawBreedsObj && !_.isEmpty(this.props.rawBreedsObj)){
-			var rawBreedsList = Object.keys(this.props.rawBreedsObj),
-				breed = _pickRandomBreed(rawBreedsList),
-				otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
+			var quiz = this.makeQuiz(5),
+				firstQuestion = quiz.pop();
 
-			this.setState({breed, otherBreeds});
-			this.search(breed);
+			this.search(firstQuestion.breed).then((image)=> {
+				this.setState({quiz});
+				this.setState({breedImage: image, ...firstQuestion});
+			})			
+		}
+	}
+
+	advance(){
+		if (this.state.quiz.length){
+			var question = this.state.quiz.pop();
+
+			setTimeout(() => {
+				this.search(question.breed).then((image) => {
+					this.setState({breedImage: image, ...question});
+				})
+			}, 1000);
+			
+		} else {
+			console.info("FINISHED!!!!!");
 		}
 	}
 
 	render() {
 		if(this.state.breedImage && this.state.otherBreeds && this.state.breed){
-		console.info("quiz rendered");
+			console.info("quiz rendered");
 			return (
 				<div className="quiz">
 					<h1>Quiz</h1>
 					<Slider breedImage={this.state.breedImage}></Slider>
-					<Answers otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
+					<Answers advance={this.advance.bind(this)} otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
 				</div>
 			);
 		} else {
 			return null;
 		}
 	}
+
+	makeQuiz(numOfQuestions = 1){
+		var quiz = [],
+			rawBreedsList = Object.keys(this.props.rawBreedsObj),
+			breed,
+			otherBreeds;
+
+		while(numOfQuestions-- > 0){
+			breed = _pickRandomBreed(rawBreedsList);
+			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
+			quiz.push({breed, otherBreeds});
+		}
+			
+		return quiz;
+	}
 }
-
-
 
 function _pickRandomBreed(rawBreedsList, howMany = 1, omit){
 	var results = [],

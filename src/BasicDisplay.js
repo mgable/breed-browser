@@ -1,11 +1,10 @@
 import React from 'react'
-import {
-  Route
-} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import About from './About.js';
 import BreedBrowser from './BreedBrowser.js';
 import Quiz from './quiz/Quiz.js';
 import Search from './Search.js';
+import './BasicDisplay.css';
 import _ from 'underscore';
 
 
