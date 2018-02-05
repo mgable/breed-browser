@@ -7,7 +7,7 @@ class Answers extends Component{
 	constructor(props){
 		console.info("answers initied");
 		super(props);
-		this.state = {answers: [], correct: "", userResponse: null};
+		this.state = {answers: [], correct: "", userResponse: null, right: 0, wrong: 0};
 	}
 
 	makeQuestions(props){
@@ -22,7 +22,23 @@ class Answers extends Component{
 	isCorrectAnswer(response){
 		var selectedAnswer = response.target.value;
 		this.setState({userResponse: selectedAnswer});
-		this.props.advance();
+		setTimeout(() => {
+				this.setState({userResponse: null});
+				this.props.advance();
+		},1000);
+
+	
+		if (selectedAnswer === this.state.correct){
+			console.info("CORRECT!");
+			this.setState((prevState, props) => {
+				return {right: ++prevState.right};
+			});
+		} else {
+			console.info("WRONG!!!!");
+			this.setState((prevState, props) => {
+				return {wrong: ++prevState.wrong};
+			});
+		}
 	}
 
 	componentDidMount(){
@@ -43,10 +59,11 @@ class Answers extends Component{
 				<div className="answers">
 					<h3 className="title">Answers</h3>
 					<ul>
-						{this.state.answers.map((answer) => {
-							return <Answer key={answer} answer={answer} correct={this.state.correct} isCorrectAnswer={this.isCorrectAnswer.bind(this)} userResponse={this.state.userResponse}></Answer>
+						{this.state.answers.map((answer, index) => {
+							return <Answer finished={this.props.finished} key={answer + index} answer={answer} correct={this.state.correct} isCorrectAnswer={this.isCorrectAnswer.bind(this)} userResponse={this.state.userResponse}></Answer>
 						})}
 					</ul>
+					<div>Correct: {this.state.right} Wrong: {this.state.wrong} Total: {this.props.total}</div>
 				</div>
 			);
 		} else {

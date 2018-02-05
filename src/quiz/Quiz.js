@@ -9,7 +9,7 @@ class Quiz extends Component{
 	constructor(props){
 		console.info("quiz inited");
 		super(props);
-		this.state = {breedImage: "", breed: "", quiz:[]}
+		this.state = {breedImage: "", breed: "", quiz:[], total: 5, finished: false}
 	}
 
 	search(breed){
@@ -24,7 +24,7 @@ class Quiz extends Component{
 		console.info("Quiz componentDidMount");
 
 		if (this.props && this.props.rawBreedsObj && !_.isEmpty(this.props.rawBreedsObj)){
-			var quiz = this.makeQuiz(5),
+			var quiz = this.makeQuiz(this.state.total),
 				firstQuestion = quiz.pop();
 
 			this.search(firstQuestion.breed).then((image)=> {
@@ -38,14 +38,17 @@ class Quiz extends Component{
 		if (this.state.quiz.length){
 			var question = this.state.quiz.pop();
 
-			setTimeout(() => {
+			//setTimeout(() => {
 				this.search(question.breed).then((image) => {
 					this.setState({breedImage: image, ...question});
 				})
-			}, 1000);
+			//}, 1000);
 			
 		} else {
 			console.info("FINISHED!!!!!");
+			//setTimeout(() => {
+				this.setState({"finished": true});
+			//},1000);
 		}
 	}
 
@@ -56,7 +59,7 @@ class Quiz extends Component{
 				<div className="quiz">
 					<h1>Quiz</h1>
 					<Slider breedImage={this.state.breedImage}></Slider>
-					<Answers advance={this.advance.bind(this)} otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
+					<Answers finished={this.state.finished} total={this.state.total} advance={this.advance.bind(this)} otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
 				</div>
 			);
 		} else {
