@@ -15,7 +15,7 @@ class Answers extends Component{
 			var answers = props.otherBreeds.slice(0);
 			answers.push(props.breed);
 			answers = _.shuffle(answers);
-			this.setState({answers, correct:props.breed});
+			this.setState({answers, correct:props.breed, userResponse: null});
 		}
 	}
 
@@ -23,7 +23,7 @@ class Answers extends Component{
 		var selectedAnswer = response.target.value;
 		this.setState({userResponse: selectedAnswer});
 		setTimeout(() => {
-				this.setState({userResponse: null});
+				//this.setState({});
 				this.props.advance();
 		},1000);
 

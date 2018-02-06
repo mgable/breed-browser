@@ -38,17 +38,13 @@ class Quiz extends Component{
 		if (this.state.quiz.length){
 			var question = this.state.quiz.pop();
 
-			//setTimeout(() => {
-				this.search(question.breed).then((image) => {
-					this.setState({breedImage: image, ...question});
-				})
-			//}, 1000);
+			this.search(question.breed).then((image) => {
+				this.setState({breedImage: image, ...question});
+			})
 			
 		} else {
 			console.info("FINISHED!!!!!");
-			//setTimeout(() => {
-				this.setState({"finished": true});
-			//},1000);
+			this.setState({"finished": true});
 		}
 	}
 

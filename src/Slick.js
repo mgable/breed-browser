@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
-import FontAwesome from 'react-fontawesome';
-import 'font-awesome/css/font-awesome.css';
 import "../node_modules/slick-carousel/slick/slick.css";
 import "../node_modules/slick-carousel/slick/slick-theme.css";
 import './App.css';
@@ -26,9 +24,6 @@ class Slick extends Component {
 				"lazyLoad": 'ondemand'
 			}
 		}]};
-
-		// var settings = {"slidesToShow":1, "slidesToScroll":1,"lazyLoad": true}
-
 
 		return (
 			<div className="slick">
