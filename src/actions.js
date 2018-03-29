@@ -9,6 +9,7 @@ import _ from 'underscore';
  export const NEXT_QUESTION = 'NEXT_QUESTION'
  export const MAKE_QUIZ = 'MAKE_QUIZ'
  export const QUIZ_READY = 'QUIZ_READY'
+ export const MAKE_BREEDS_LIST = 'MAKE_BREEDS_LIST'
  export const STATES = {START: "START", LOADED: "LOADED", FINISH: "FINISH"}
 
 /*
@@ -31,17 +32,28 @@ import _ from 'underscore';
  	return { type: MAKE_QUIZ, quiz }
  }
 
+ export function makeBreedsList(breeds) {
+ 	console.info("I am make the breeds list in actions");
+ 	return {type: MAKE_BREEDS_LIST, breeds}
+ }
+
+var data;	
 
  export function fetchPosts() { 
  	return function (dispatch) { 
  		//dispatch(getData()) 
  		return _fetchData()
  		.then(
- 			response => _makeQuiz(response),
+ 			response => {data = response; return _makeBreedsList(response.message)},
  			error => console.log('An error occurred.', error)
- 			)
- 		.then(json => { dispatch(makeQuiz(json));dispatch(quizReady()) }
- 			)
+ 		).then(
+ 			json => { dispatch(makeBreedsList(json)) }
+ 		).then(
+ 			response => _makeQuiz(data),
+ 			error => console.log('An error occurred.', error)
+ 		).then(
+ 			json => { dispatch(makeQuiz(json));dispatch(quizReady()) }
+ 		)
  	}
  }
 
@@ -54,6 +66,33 @@ import _ from 'underscore';
  		});	
  	});
  }
+
+ function _makeBreedsList(results){
+ 	console.info("the results");
+ 	console.info(results);
+ 	return _groupByAlpha(results);
+ }
+
+ function _groupByAlpha(breeds){
+	return _.groupBy(_.map(breeds, function(val, key){
+		return {name: key, subbreeds: val};
+	}), function(item){
+		return item.name && item.name.charAt(0);
+	});
+}
+
+// function _formatBreedsList(alphaBreedsObj, props){
+// 	var index = 0;
+// 	return _.map(alphaBreedsObj, (breeds, alpha) => {
+// 		index++;
+// 		return (
+// 			<ul className="no-bullets" key={index.toString()}>
+// 				<li><h2>{alpha.toUpperCase()}</h2></li>
+// 				<LineItem breeds={breeds} setBreed={props.updateIt.bind(props)}></LineItem>
+// 			</ul>
+// 		);
+// 	});
+// }
 
  const _makeQuiz = (breeds) => {
  	return new Promise((resolve, reject) => {

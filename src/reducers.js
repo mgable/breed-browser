@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES } from './actions'
+import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREEDS_LIST } from './actions'
 import _ from 'underscore'
 
  
@@ -16,6 +16,10 @@ const initialState = {
 		image: null,
 		response: null
 	}]
+}
+
+const initialStateBreeds = {
+	rawBreedsObj:{}
 }
 /*
 	{
@@ -56,6 +60,24 @@ function quiz(state = initialState, action) {
 	}  
 }
 
+function breedbrowser(state = initialStateBreeds, action) {
+	switch(action.type){
+		case MAKE_BREEDS_LIST: return makeBreedsList(state, action)
+		// case NEXT_QUESTION: return advanceQuiz(state, action)
+		// case MAKE_QUIZ: return makeQuiz(state, action)
+		// case QUIZ_READY: return broadcastQuiz(state, action)
+		default: return state
+	}  
+}
+
+function makeBreedsList(state, action){
+	console.info("I should make the breeds list");
+	console.info(state, action);
+	state.rawBreedsObj = action.breeds;
+	return _.extend({}, state);
+}
+
+
 function broadcastQuiz(state, action){
 	state.status = STATES.LOADED;
 	return _.extend({}, state);
@@ -89,7 +111,8 @@ function advanceQuiz(state, action){
 
  
 const quizApp = combineReducers({
-	quiz
+	quiz,
+	breedbrowser
 })
  
 export default quizApp

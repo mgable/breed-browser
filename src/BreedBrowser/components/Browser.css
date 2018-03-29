@@ -1,0 +1,8 @@
+@media (max-width: 420px) {
+  .breed-listing {
+    margin: 25px 0 0; } }
+
+.breed-listing ul.no-bullets ul ul {
+  margin: 0 0 0 17px; }
+  .breed-listing ul.no-bullets ul ul li {
+    list-style-type: circle !important; }
