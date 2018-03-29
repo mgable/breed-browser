@@ -1,103 +1,87 @@
-import React, { Component } from 'react';
-import Slider from './Slider.js';
-import Answers from './Answers.js';
-import Search from '../Search.js';
-import _ from 'underscore';
-import './Quiz.css';
+import { connect } from 'react-redux';
+import { submitAnswer, nextQuestion } from '../actions';
+import Layout from './components/Layout.jsx';
+//import _ from 'underscore';
 
-class Quiz extends Component{
-	constructor(props){
-		console.info("quiz inited");
-		super(props);
-		this.state = {breedImage: "", breed: "", quiz:[], total: 5, finished: false}
-	}
+const getChoices = (state) => {
+	//console.info(state);
+	return state.quiz.questions[state.quiz.currentQuestion].choiceList
+}
 
-	search(breed){
-		if(breed){
-			return Search.getRandomBreedImage(breed).then((image) => {
-				return image;
-			});
-		}
-	}
+const getImage = (state) => {
+	// console.info("the iamge");
+	// console.info(state);
+	return state.quiz.questions[state.quiz.currentQuestion].image
+}
 
-	componentDidMount() {
-		console.info("Quiz componentDidMount");
+const getResponse = (state) => {
+	// console.info("the response");
+	// console.info(state);
+	return state.quiz.questions[state.quiz.currentQuestion].response
+}
 
-		if (this.props && this.props.rawBreedsObj && !_.isEmpty(this.props.rawBreedsObj)){
-			var quiz = this.makeQuiz(this.state.total),
-				firstQuestion = quiz.pop();
+const getCurrentQuestion = (state) => {
+	// console.info("the response");
+	// console.info(state);
+	return state.quiz.questions[state.quiz.currentQuestion].response
+}
 
-			this.search(firstQuestion.breed).then((image)=> {
-				this.setState({quiz});
-				this.setState({breedImage: image, ...firstQuestion});
-			})			
-		}
-	}
+const getCurrentSelection = (state) => {
+	// console.info("the response");
+	// console.info(state);
+	return state.quiz.currentSelection
+}
 
-	advance(){
-		if (this.state.quiz.length){
-			var question = this.state.quiz.pop();
+const getTotal = (state) => {
+	return state.quiz.questions.length;
+}
 
-			this.search(question.breed).then((image) => {
-				this.setState({breedImage: image, ...question});
-			})
-			
-		} else {
-			console.info("FINISHED!!!!!");
-			this.setState({"finished": true});
-		}
-	}
+const getLoaded = (state) => {
+	return state.quiz.status;
+}
 
-	render() {
-		if(this.state.breedImage && this.state.otherBreeds && this.state.breed){
-			console.info("quiz rendered");
-			return (
-				<div className="quiz">
-					<h1>Quiz</h1>
-					<Slider breedImage={this.state.breedImage}></Slider>
-					<Answers finished={this.state.finished} total={this.state.total} advance={this.advance.bind(this)} otherBreeds={this.state.otherBreeds} breed={this.state.breed}></Answers>
-				</div>
-			);
-		} else {
-			return null;
-		}
-	}
+const getWrong = (state) => {
+	return state.quiz.wrong;
+}
 
-	makeQuiz(numOfQuestions = 1){
-		var quiz = [],
-			rawBreedsList = Object.keys(this.props.rawBreedsObj),
-			breed,
-			otherBreeds;
+const getCorrect = (state) => {
+	return state.quiz.correct;
+}
 
-		while(numOfQuestions-- > 0){
-			breed = _pickRandomBreed(rawBreedsList);
-			otherBreeds = _pickRandomBreed(rawBreedsList, 3, breed);
-			quiz.push({breed, otherBreeds});
-		}
-			
-		return quiz;
+const getCurrent = (state) => {
+	return state.quiz.currentQuestion + 1;
+}
+
+const mapStateToProps = state => {
+	return {
+		choices: getChoices(state),
+		image: getImage(state),
+		response: getResponse(state),
+		current: getCurrent(state),
+		currentQuestion: getCurrentQuestion(state),
+		currentSelection: getCurrentSelection(state),
+		total: getTotal(state),
+		status: getLoaded(state),
+		wrong: getWrong(state),
+		correct: getCorrect(state)
 	}
 }
 
-function _pickRandomBreed(rawBreedsList, howMany = 1, omit){
-	var results = [],
-		total = howMany;
-
-	if (omit){
-		rawBreedsList = _.without(rawBreedsList, omit);
+const mapDispatchToProps = dispatch => {
+	return {
+		onChoiceClick: id => {
+			dispatch(submitAnswer(id));
+			setTimeout(() => {
+				dispatch(nextQuestion());
+			}, 4000)
+		}
 	}
-
-	while(total--){
-		var index = Math.floor((Math.random() * rawBreedsList.length)),
-			item = rawBreedsList.splice(index, 1);
-		results.push(item[0]);
-	}
-
-	if (howMany === 1){
-		return results[0];
-	}
-
-	return results;
 }
 
-export default Quiz;
+
+const QuizApp = connect(
+	mapStateToProps,
+	mapDispatchToProps
+	)(Layout)
+
+	export default QuizApp

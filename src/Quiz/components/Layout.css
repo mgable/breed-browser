@@ -1,0 +1,18 @@
+.quiz-holder {
+	position: relative;
+	width: 325px;
+	margin: 8px auto 0;
+	width: 325px;
+}
+
+.quiz-holder .wait {
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	z-index: -1;
+}
+
+.image-holder {
+	height: 300px;
+	background-size: cover;
+}
