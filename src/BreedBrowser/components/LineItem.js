@@ -12,7 +12,7 @@ const LineItem = ({breeds, parent, onChoiceClick}) => {
 						</li>
 					)
 				} else {
-					return <li onClick={(event) => onChoiceClick((parent || breed.name), breed, event)} key={breed.name || breed}>{breed.name || breed}</li>
+					return <li onClick={(event) => onChoiceClick((parent || breed.name), (parent ? breed : null), event)} key={breed.name || breed}>{breed.name || breed}</li>
 				}
 			})}
 		</ul>

@@ -8,7 +8,7 @@ const Layout = ({images, breed, sub, breeds, onChoiceClick, onSetBreed}) => {
 	return (
 		<div className="App">
 			<div className="main">
-				<h2>Now showing {breed} {sub} pictures.</h2>
+				<h2>Now showing {sub} {breed} pictures.</h2>
 				<div className="breed-listing">
 					<Browser sub={sub} breed={breed} breeds={breeds} onChoiceClick={onChoiceClick} onSetBreed={onSetBreed}></Browser>
 				</div>

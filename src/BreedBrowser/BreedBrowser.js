@@ -169,11 +169,15 @@ const getBreeds = (state) => {
 	return state.breedbrowser.breeds;
 }
 
+const getSubBreed = (state) => {
+	return state.breedbrowser.sub;
+}
+
 const mapStateToProps = state => {
 	return {
 		// images:
 		breed: getBreed(state),
-		// sub:
+		sub: getSubBreed(state),
 		breeds: getBreeds(state)
 		// filterBreeds:
 		// choices: getChoices(state),
