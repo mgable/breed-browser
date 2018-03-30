@@ -1,8 +1,8 @@
 import React from 'react'
 import {Route} from 'react-router-dom';
-import About from './About/About.js';
-import BreedBrowser from './BreedBrowser/BreedBrowser.js';
-import Quiz from './Quiz/Quiz.js';
+import About from '../About/About.js';
+import BreedBrowser from '../BreedBrowser/BreedBrowser.js';
+import Quiz from '../Quiz/Quiz.js';
 import './BasicDisplay.css';
 
 

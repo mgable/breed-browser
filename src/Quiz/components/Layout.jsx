@@ -1,7 +1,7 @@
 import React from 'react';
 import ChoiceList from './ChoiceList.jsx';
 import './Layout.css'
-import finished from '../../billpaxtongameoveraliens.jpg'
+import finished from './billpaxtongameoveraliens.jpg'
 import Results from './Results.jsx';
 import { STATES } from '../../actions';
  
