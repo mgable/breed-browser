@@ -88,7 +88,7 @@ const _getBreedImages = (breed, sub) =>{
 			throw new Error ("There was an error getting the random breed images: " + error)
 		});
 	} else if (sub){
-		return Search.getSubBreedImages(sub, breed).then((breedImages) => {
+		return Search.getSubBreedImages(breed, sub).then((breedImages) => {
 			breedImages.length = HOWMANY;
 			return breedImages;
 		});

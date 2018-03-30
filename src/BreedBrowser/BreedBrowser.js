@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { selectBreed, GetBreedImages } from '../actions';
 import Layout from './components/Layout.jsx';
-import _ from 'underscore';
 
 const getBreed = (state) => {
 	return state.breedbrowser.breed;
@@ -35,14 +34,9 @@ const mapDispatchToProps = dispatch => {
 				event.preventDefault();
 				event.stopPropagation();
 			}
-			console.info("I have made a selection of");
-			console.info(breed, sub);
+
 			GetBreedImages(breed, sub).then((response) => {
-				console.info("the response");
-				console.info(response);
-				let images = _.map(response, (image) => {
-					return image.message;
-				});
+				let images = response.message.slice(0, response.length);
 				dispatch(selectBreed(breed, sub, images));
 			}, (error) => {
 
