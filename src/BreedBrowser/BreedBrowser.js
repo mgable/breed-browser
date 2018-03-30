@@ -114,7 +114,7 @@
 
 
 import { connect } from 'react-redux';
-// import { submitAnswer, nextQuestion } from '../actions';
+import { selectBreed } from '../actions';
 import Layout from './components/Layout.jsx';
 
 // const getChoices = (state) => {
@@ -161,16 +161,18 @@ import Layout from './components/Layout.jsx';
 // const getCorrect = (state) => {
 // 	return state.quiz.correct;
 // }
+const getBreed = (state) => {
+	return state.breedbrowser.breed;
+}
 
 const getBreeds = (state) => {
-	console.info(state);
-	return state.breedbrowser.rawBreedsObj;
+	return state.breedbrowser.breeds;
 }
 
 const mapStateToProps = state => {
 	return {
 		// images:
-		// breed:
+		breed: getBreed(state),
 		// sub:
 		breeds: getBreeds(state)
 		// filterBreeds:
@@ -189,11 +191,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onChoiceClick: id => {
-			// dispatch(submitAnswer(id));
-			// setTimeout(() => {
-			// 	dispatch(nextQuestion());
-			// }, 4000)
+		onChoiceClick: (breed, sub, event) => {
+			if (event){
+				event.preventDefault();
+				event.stopPropagation();
+			}
+			dispatch(selectBreed(breed, sub));
 		}
 	}
 }
@@ -202,7 +205,19 @@ const mapDispatchToProps = dispatch => {
 const BreedBrowser = connect(
 	mapStateToProps,
 	mapDispatchToProps
-	)(Layout)
+)(Layout)
+
+/*
+updateIt(breed, sub){
+		if (sub && typeof sub === "string"){
+			this.setState({sub});
+		} else {
+			sub = false;
+		}
+		this.setState({breed});
+		this.getBreedImages(breed, sub);
+	} 
+	*/
 
 
 export default BreedBrowser

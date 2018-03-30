@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import App from './App'
 import { fetchPosts } from './actions'
-import registerServiceWorker from './registerServiceWorker';
+import './registerServiceWorker';
 import './index.css';
 
 let store = createStore(

@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './LineItem.css';
 
-class LineItem extends Component{
-	constructor(props) {
-		super(props);
-		this.state = {breeds: props.breeds};
-		this.handleClick = this.handleClick.bind(this);
-	}
+const LineItem = ({breeds, parent, onChoiceClick}) => {
 
-	handleClick(event) {
-		// console.info(event.target);
-		if (event){
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		this.props.setBreed(event.target.textContent);
-	}
+	return (
+		<ul>
+			{breeds.map((breed) => {
+				if (breed.subbreeds && breed.subbreeds.length){
+					return ( <li onClick={(event) => onChoiceClick(breed.name, null, event)} key={breed.name}>{breed.name}
+						<LineItem breeds={breed.subbreeds} onChoiceClick={onChoiceClick} parent={breed.name}></LineItem>
+						</li>
+					)
+				} else {
+					return <li onClick={(event) => onChoiceClick((parent || breed.name), breed, event)} key={breed.name || breed}>{breed.name || breed}</li>
+				}
+			})}
+		</ul>
+	);
+}
 
-	render(){
-
-		return (
-			<ul>
+/*
+<ul>
 				{this.props.breeds.map((breed) => {
 					if (breed.subbreeds && breed.subbreeds.length){
 						return ( <li onClick={(event) => this.props.setBreed(breed.name, event)} key={breed.name}>{breed.name}
@@ -32,8 +32,41 @@ class LineItem extends Component{
 					}
 				})}
 			</ul>
-		);
-	}
-}
+*/
 
 export default LineItem;
+
+/*
+import React, { Component } from 'react';
+import SearchField from './SearchField.js';
+import LineItem from './LineItem';
+import './Browser.css';
+import _ from 'underscore';
+
+const Browser = ({breeds, onChoiceClick}) => {
+	// render(){
+		// return null;
+		// return (
+		// 	<div className="main">
+		// 		
+		// 		<SearchField breed={this.props.breed} filterBreeds={this.props.filterBreeds}></SearchField>
+		// 		<div className="breed-listing">
+		// 			{this.props.breeds}
+		// 		</div>
+		// 	</div>
+		// );
+		var index = 0;
+		return _.map(breeds, (breedsX, alpha) => {
+			index++;
+			return (
+				<ul className="no-bullets" key={index.toString()}>
+					<li><h2>{alpha.toUpperCase()}</h2></li>
+					<LineItem breeds={breedsX} ></LineItem>
+				</ul>
+			);
+		});
+	// }
+}
+
+export default Browser;
+*/

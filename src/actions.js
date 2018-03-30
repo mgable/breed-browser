@@ -10,6 +10,8 @@ import _ from 'underscore';
  export const MAKE_QUIZ = 'MAKE_QUIZ'
  export const QUIZ_READY = 'QUIZ_READY'
  export const MAKE_BREEDS_LIST = 'MAKE_BREEDS_LIST'
+ export const FILTER_BREEDS = 'FILTER_BREEDS'
+ export const SELECT_BREED = 'SELECT_BREED'
  export const STATES = {START: "START", LOADED: "LOADED", FINISH: "FINISH"}
 
 /*
@@ -32,9 +34,16 @@ import _ from 'underscore';
  	return { type: MAKE_QUIZ, quiz }
  }
 
- export function makeBreedsList(breeds) {
- 	console.info("I am make the breeds list in actions");
- 	return {type: MAKE_BREEDS_LIST, breeds}
+ export function selectBreed(breed, sub) {
+ 	return { type: SELECT_BREED, breed, sub }
+ }
+
+ export function makeBreedBrowser(breedbrowser) {
+ 	return {type: MAKE_BREEDS_LIST, breedbrowser}
+ }
+
+ export function filterBreeds(breed){
+ 	return {type: FILTER_BREEDS, breed}
  }
 
 var data;	
@@ -47,7 +56,7 @@ var data;
  			response => {data = response; return _makeBreedsList(response.message)},
  			error => console.log('An error occurred.', error)
  		).then(
- 			json => { dispatch(makeBreedsList(json)) }
+ 			json => { dispatch(makeBreedBrowser(json)) }
  		).then(
  			response => _makeQuiz(data),
  			error => console.log('An error occurred.', error)
@@ -68,9 +77,7 @@ var data;
  }
 
  function _makeBreedsList(results){
- 	console.info("the results");
- 	console.info(results);
- 	return _groupByAlpha(results);
+ 	return {breeds: _groupByAlpha(results), rawBreedsObj: results}
  }
 
  function _groupByAlpha(breeds){
@@ -80,19 +87,6 @@ var data;
 		return item.name && item.name.charAt(0);
 	});
 }
-
-// function _formatBreedsList(alphaBreedsObj, props){
-// 	var index = 0;
-// 	return _.map(alphaBreedsObj, (breeds, alpha) => {
-// 		index++;
-// 		return (
-// 			<ul className="no-bullets" key={index.toString()}>
-// 				<li><h2>{alpha.toUpperCase()}</h2></li>
-// 				<LineItem breeds={breeds} setBreed={props.updateIt.bind(props)}></LineItem>
-// 			</ul>
-// 		);
-// 	});
-// }
 
  const _makeQuiz = (breeds) => {
  	return new Promise((resolve, reject) => {

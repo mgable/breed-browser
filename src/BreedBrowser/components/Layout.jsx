@@ -2,13 +2,15 @@ import React from 'react'
 // import Slick from "./Slick.js";
 import Browser from './Browser.js';
 
-const Layout = ({images, breed, sub, breeds, filterBreeds}) => {
+const Layout = ({images, breed, sub, breeds, onChoiceClick, onSetBreed}) => {
+
 
 	return (
 		<div className="App">
 			<div className="main">
+				<h2>Now showing {breed} {sub} pictures.</h2>
 				<div className="breed-listing">
-					<Browser sub={sub} breed={breed} breeds={breeds} filterBreeds={filterBreeds}></Browser>
+					<Browser sub={sub} breed={breed} breeds={breeds} onChoiceClick={onChoiceClick} onSetBreed={onSetBreed}></Browser>
 				</div>
 			</div>
 		</div>

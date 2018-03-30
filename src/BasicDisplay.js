@@ -4,7 +4,6 @@ import About from './About.js';
 import BreedBrowser from './BreedBrowser/BreedBrowser.js';
 import Quiz from './Quiz/Quiz.js';
 import './BasicDisplay.css';
-import _ from 'underscore';
 
 
 class BasicDisplay extends React.Component{

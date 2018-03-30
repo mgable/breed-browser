@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREEDS_LIST } from './actions'
+import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREEDS_LIST, FILTER_BREEDS, SELECT_BREED } from './actions'
 import _ from 'underscore'
 
  
@@ -19,7 +19,10 @@ const initialState = {
 }
 
 const initialStateBreeds = {
-	rawBreedsObj:{}
+	rawBreedsObj:{},
+	breed: "random",
+	breeds: [],
+	sub: null
 }
 /*
 	{
@@ -63,6 +66,8 @@ function quiz(state = initialState, action) {
 function breedbrowser(state = initialStateBreeds, action) {
 	switch(action.type){
 		case MAKE_BREEDS_LIST: return makeBreedsList(state, action)
+		case FILTER_BREEDS:  return filterBreedsList(state, action)
+		case SELECT_BREED: return selectBreed(state, action)
 		// case NEXT_QUESTION: return advanceQuiz(state, action)
 		// case MAKE_QUIZ: return makeQuiz(state, action)
 		// case QUIZ_READY: return broadcastQuiz(state, action)
@@ -70,10 +75,39 @@ function breedbrowser(state = initialStateBreeds, action) {
 	}  
 }
 
-function makeBreedsList(state, action){
-	console.info("I should make the breeds list");
+function filterBreedsList(state, action){
+	console.info("I am going to fileter the breeds list");
 	console.info(state, action);
-	state.rawBreedsObj = action.breeds;
+	return _.extend({}, state);
+}
+
+function selectBreed(state, action){
+	console.info("I am going to select the breed");
+	console.info(state, action);
+	state.breed = action.breed;
+	state.sub = action.sub;
+	return _.extend({}, state);
+}
+
+/*	
+	filterBreeds(input){
+		var bl = {},
+			re = new RegExp(input);
+
+		_.each(this.state.rawBreedsList, (value, breed) => {
+
+			if (re.test(breed)){
+				_.extend(bl, {[breed]: value});
+			}
+		});
+
+		this.setBreedsList(bl);
+	}
+*/
+
+function makeBreedsList(state, action){
+	state.rawBreedsObj = action.breedbrowser.rawBreedsObj;
+	state.breeds = action.breedbrowser.breeds;
 	return _.extend({}, state);
 }
 

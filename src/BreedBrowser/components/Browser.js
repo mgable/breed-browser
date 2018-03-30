@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import SearchField from './SearchField.js';
+import React from 'react';
+// import SearchField from './SearchField.js';
 import LineItem from './LineItem';
 import './Browser.css';
 import _ from 'underscore';
 
-const Browser = ({breeds}) => {
-	console.info("the breeds in broweser");
-	console.info(breeds);
+const Browser = ({breeds, onChoiceClick}) => {
 	// render(){
 		// return null;
 		// return (
 		// 	<div className="main">
-		// 		<h2>Now showing {this.props.breed} {this.props.sub} pictures.</h2>
+		// 		
 		// 		<SearchField breed={this.props.breed} filterBreeds={this.props.filterBreeds}></SearchField>
 		// 		<div className="breed-listing">
 		// 			{this.props.breeds}
@@ -19,12 +17,12 @@ const Browser = ({breeds}) => {
 		// 	</div>
 		// );
 		var index = 0;
-		return _.map(breeds, (breedsX, alpha) => {
+		return _.map(breeds, (breedsList, alpha) => {
 			index++;
 			return (
 				<ul className="no-bullets" key={index.toString()}>
 					<li><h2>{alpha.toUpperCase()}</h2></li>
-					<LineItem breeds={breedsX} ></LineItem>
+					<LineItem breeds={breedsList} onChoiceClick={onChoiceClick} ></LineItem>
 				</ul>
 			);
 		});
