@@ -38,6 +38,8 @@ const mapDispatchToProps = dispatch => {
 			console.info("I have made a selection of");
 			console.info(breed, sub);
 			GetBreedImages(breed, sub).then((response) => {
+				console.info("the response");
+				console.info(response);
 				let images = _.map(response, (image) => {
 					return image.message;
 				});
