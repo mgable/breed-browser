@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREEDS_LIST, FILTER_BREEDS, SELECT_BREED } from './actions'
+import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREED_BROWSER, FILTER_BREEDS, SELECT_BREED } from './actions'
 import _ from 'underscore'
 
  
@@ -22,6 +22,7 @@ const initialStateBreeds = {
 	rawBreedsObj:{},
 	breed: "random",
 	breeds: [],
+	images: [],
 	sub: null
 }
 /*
@@ -65,12 +66,9 @@ function quiz(state = initialState, action) {
 
 function breedbrowser(state = initialStateBreeds, action) {
 	switch(action.type){
-		case MAKE_BREEDS_LIST: return makeBreedsList(state, action)
+		case MAKE_BREED_BROWSER: return makeBreedBrowser(state, action)
 		case FILTER_BREEDS:  return filterBreedsList(state, action)
 		case SELECT_BREED: return selectBreed(state, action)
-		// case NEXT_QUESTION: return advanceQuiz(state, action)
-		// case MAKE_QUIZ: return makeQuiz(state, action)
-		// case QUIZ_READY: return broadcastQuiz(state, action)
 		default: return state
 	}  
 }
@@ -86,6 +84,7 @@ function selectBreed(state, action){
 	console.info(state, action);
 	state.breed = action.breed;
 	state.sub = action.sub;
+	state.images = action.images;
 	return _.extend({}, state);
 }
 
@@ -105,9 +104,10 @@ function selectBreed(state, action){
 	}
 */
 
-function makeBreedsList(state, action){
+function makeBreedBrowser(state, action){
 	state.rawBreedsObj = action.breedbrowser.rawBreedsObj;
 	state.breeds = action.breedbrowser.breeds;
+	state.images = action.breedbrowser.images;
 	return _.extend({}, state);
 }
 
