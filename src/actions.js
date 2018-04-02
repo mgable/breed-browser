@@ -71,8 +71,6 @@ const _makeBreedsList = (results) => {
 }
 
 const _groupByAlpha = (breeds) => {
-	console.info("the breeds are");
-	console.info(breeds);
 	return _.groupBy(_.map(breeds, (val, key) => {
 		return {name: key, subbreeds: val};
 	}), (item) => {
@@ -227,5 +225,6 @@ export function makeBreedBrowser(breedbrowser) {
 }
 
 export function filterBreeds(term){
+	console.info("here in filterBreeds");
 	return {type: FILTER_BREEDS, term}
 }

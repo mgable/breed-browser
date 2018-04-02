@@ -28,23 +28,13 @@ const initialStateBreeds = {
 /*
 	{
 		choiceList: [
-		{text: "Doberman", id: 1},
-		{text: "Scottish Terrier", id: 2},
-		{text: "Akira", id: 3},
-		{text: "Hound", id: 4},
+			{text: "Doberman", id: 1},
+			{text: "Scottish Terrier", id: 2},
+			{text: "Akira", id: 3},
+			{text: "Hound", id: 4},
 		], 
 		answer: 2,
 		image: "https://dummyimage.com/150x250/000/fff",
-		response: null
-	},{
-		choiceList: [
-		{text: "Saint Bernard", id: 1},
-		{text: "Germany Shepard", id: 2},
-		{text: "Golden Retriever", id: 3},
-		{text: "Great Dane", id: 4},
-		], 
-		answer: 0,
-		image: "https://dummyimage.com/150x250/CCC/FFF",
 		response: null
 	}
 */
@@ -74,11 +64,14 @@ function breedbrowser(state = initialStateBreeds, action) {
 }
 
 function filterBreedsList(state, action){
+	console.info("filtering breeds list");
 	if (action.term){
 		var breedsList = {},
 			re = new RegExp("\\b" + action.term);
 
 		_.each(state.rawBreedsObj, (value, breed) => {
+			console.info("the value is ");
+			console.info(value);
 			if (re.test(breed)){
 				_.extend(breedsList, {[breed]: value});
 			}
@@ -100,22 +93,6 @@ function selectBreed(state, action){
 	state.images = action.images;
 	return _.extend({}, state);
 }
-
-/*	
-	filterBreeds(input){
-		var bl = {},
-			re = new RegExp(input);
-
-		_.each(this.state.rawBreedsList, (value, breed) => {
-
-			if (re.test(breed)){
-				_.extend(bl, {[breed]: value});
-			}
-		});
-
-		this.setBreedsList(bl);
-	}
-*/
 
 function makeBreedBrowser(state, action){
 	state.rawBreedsObj = action.breedbrowser.rawBreedsObj;

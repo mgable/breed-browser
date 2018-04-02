@@ -44,6 +44,8 @@ const mapDispatchToProps = dispatch => {
 			
 		},
 		onFilterBreeds: (term) => {
+			console.info("I am going to filter breeds");
+			console.info(term);
 			dispatch(filterBreeds(term))
 		}
 	}

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
+// using 'class' not 'const' on purpose
 class SearchField extends Component {
 	constructor(props) {
-		console.info("this props for searchfiekd");
-		console.info(props);
 		super(props);
 		this.state = {breed: props.breed};
 		this.clearSearch = this.clearSearch.bind(this);
@@ -11,12 +10,14 @@ class SearchField extends Component {
 	}
 
 	handleChange(event) {
+		console.info("fitlering");
 		var value = event.target.value;
 		this.setState({breed: value});
 		this.props.onFilterBreeds(value);
 	}
 
 	clearSearch(){
+		console.info("clear search");
 		this.setState({breed: ""});
 		this.props.onFilterBreeds("");
 	}
