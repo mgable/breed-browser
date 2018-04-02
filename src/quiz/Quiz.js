@@ -1,34 +1,24 @@
 import { connect } from 'react-redux';
 import { submitAnswer, nextQuestion } from '../actions';
 import Layout from './components/Layout.jsx';
-//import _ from 'underscore';
 
 const getChoices = (state) => {
-	//console.info(state);
 	return state.quiz.questions[state.quiz.currentQuestion].choiceList
 }
 
 const getImage = (state) => {
-	// console.info("the iamge");
-	// console.info(state);
 	return state.quiz.questions[state.quiz.currentQuestion].image
 }
 
 const getResponse = (state) => {
-	// console.info("the response");
-	// console.info(state);
 	return state.quiz.questions[state.quiz.currentQuestion].response
 }
 
 const getCurrentQuestion = (state) => {
-	// console.info("the response");
-	// console.info(state);
 	return state.quiz.questions[state.quiz.currentQuestion].response
 }
 
 const getCurrentSelection = (state) => {
-	// console.info("the response");
-	// console.info(state);
 	return state.quiz.currentSelection
 }
 

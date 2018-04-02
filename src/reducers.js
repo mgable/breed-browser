@@ -64,16 +64,27 @@ function breedbrowser(state = initialStateBreeds, action) {
 }
 
 function filterBreedsList(state, action){
-	console.info("filtering breeds list");
 	if (action.term){
 		var breedsList = {},
 			re = new RegExp("\\b" + action.term);
 
 		_.each(state.rawBreedsObj, (value, breed) => {
-			console.info("the value is ");
-			console.info(value);
+			var subBreedsList = [];
+			
 			if (re.test(breed)){
 				_.extend(breedsList, {[breed]: value});
+			}
+
+			if (value.length){
+				_.each(value, (sub) => {
+					if (re.test(sub)){
+						subBreedsList.push(sub)
+					}
+				})
+			}
+
+			if (subBreedsList.length){
+				_.extend(breedsList, {[breed]: subBreedsList});
 			}
 		});
 

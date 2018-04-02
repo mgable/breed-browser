@@ -19,19 +19,4 @@ const LineItem = ({breeds, parent, onChoiceClick}) => {
 	);
 }
 
-/*
-<ul>
-				{this.props.breeds.map((breed) => {
-					if (breed.subbreeds && breed.subbreeds.length){
-						return ( <li onClick={(event) => this.props.setBreed(breed.name, event)} key={breed.name}>{breed.name}
-							<LineItem breeds={breed.subbreeds} setBreed={(evt) => this.props.setBreed(evt, breed.name)}></LineItem>
-							</li>
-						)
-					} else {
-						return <li onClick={this.handleClick} key={breed.name || breed}>{breed.name || breed}</li>
-					}
-				})}
-			</ul>
-*/
-
 export default LineItem;

@@ -225,6 +225,5 @@ export function makeBreedBrowser(breedbrowser) {
 }
 
 export function filterBreeds(term){
-	console.info("here in filterBreeds");
 	return {type: FILTER_BREEDS, term}
 }
