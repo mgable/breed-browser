@@ -192,9 +192,6 @@ export const MAKE_BREED_BROWSER = 'MAKE_BREED_BROWSER'
 export const FILTER_BREEDS = 'FILTER_BREEDS'
 export const SELECT_BREED = 'SELECT_BREED'
 export const STATES = {START: "START", LOADED: "LOADED", FINISH: "FINISH"}
-export const GetBreedImages = _getBreedImages
-export const FetchPosts = fetchPost;
-export const GroupByAlpha = _groupByAlpha;
 
 /*
  * action creators
@@ -204,7 +201,7 @@ export function submitAnswer(answer) {
 	return { type: SUBMIT_ANSWER, answer }
 }
 
- export function quizReady() {
+export function quizReady() {
 	return { type: QUIZ_READY }
 }
 
@@ -227,3 +224,11 @@ export function makeBreedBrowser(breedbrowser) {
 export function filterBreeds(term){
 	return {type: FILTER_BREEDS, term}
 }
+
+/*
+ * exported methods
+ */
+
+export const GetBreedImages = _getBreedImages
+export const FetchPosts = fetchPost;
+export const GroupByAlpha = _groupByAlpha;

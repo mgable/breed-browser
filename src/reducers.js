@@ -66,11 +66,12 @@ function breedbrowser(state = initialStateBreeds, action) {
 function filterBreedsList(state, action){
 	if (action.term){
 		var breedsList = {},
-			re = new RegExp("\\b" + action.term);
+			re = new RegExp("\\b" + action.term),
+			breeds = {}
 
 		_.each(state.rawBreedsObj, (value, breed) => {
 			var subBreedsList = [];
-			
+
 			if (re.test(breed)){
 				_.extend(breedsList, {[breed]: value});
 			}
@@ -88,14 +89,14 @@ function filterBreedsList(state, action){
 			}
 		});
 
-		state.breeds = GroupByAlpha(breedsList)
+		breeds = GroupByAlpha(breedsList)
 
 		
 	} else {
-		state.breeds = GroupByAlpha(state.rawBreedsObj)
+		breeds = GroupByAlpha(state.rawBreedsObj)
 	}
 
-	return _.extend({}, state);
+	return _.extend({}, state, {breeds: breeds});
 }
 
 function selectBreed(state, action){
