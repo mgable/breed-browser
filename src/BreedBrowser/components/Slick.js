@@ -18,15 +18,11 @@ const Slick = ({images}) => {
 		}
 	}]};
 
-	console.info("the imagews in slick");
-	console.info(images);
-
 	return (
 		<div className="slick">
 			<Slider {...settings}>
 				{
 					images.map((image) => {
-						console.info(image);
 						return <img alt="dog" key={image} src={image} className="carousel-item active" />
 					})
 				}

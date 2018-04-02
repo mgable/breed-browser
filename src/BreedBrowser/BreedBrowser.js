@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { selectBreed, GetBreedImages } from '../actions';
+import { selectBreed, filterBreeds, GetBreedImages } from '../actions';
 import Layout from './components/Layout.jsx';
 
 const getBreed = (state) => {
@@ -42,6 +42,9 @@ const mapDispatchToProps = dispatch => {
 
 			})
 			
+		},
+		onFilterBreeds: (term) => {
+			dispatch(filterBreeds(term))
 		}
 	}
 }

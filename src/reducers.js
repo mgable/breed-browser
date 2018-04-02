@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREED_BROWSER, FILTER_BREEDS, SELECT_BREED } from './actions'
+import { SUBMIT_ANSWER, NEXT_QUESTION, MAKE_QUIZ, QUIZ_READY, STATES, MAKE_BREED_BROWSER, FILTER_BREEDS, SELECT_BREED, GroupByAlpha } from './actions'
 import _ from 'underscore'
 
  
@@ -74,14 +74,27 @@ function breedbrowser(state = initialStateBreeds, action) {
 }
 
 function filterBreedsList(state, action){
-	console.info("I am going to fileter the breeds list");
-	console.info(state, action);
+	if (action.term){
+		var breedsList = {},
+			re = new RegExp("\\b" + action.term);
+
+		_.each(state.rawBreedsObj, (value, breed) => {
+			if (re.test(breed)){
+				_.extend(breedsList, {[breed]: value});
+			}
+		});
+
+		state.breeds = GroupByAlpha(breedsList)
+
+		
+	} else {
+		state.breeds = GroupByAlpha(state.rawBreedsObj)
+	}
+
 	return _.extend({}, state);
 }
 
 function selectBreed(state, action){
-	console.info("I am going to select the breed");
-	console.info(state, action);
 	state.breed = action.breed;
 	state.sub = action.sub;
 	state.images = action.images;

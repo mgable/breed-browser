@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import App from './App'
-import { fetchPosts } from './actions'
+import { FetchPosts } from './actions'
 import './registerServiceWorker';
 import './index.css';
 
@@ -17,7 +17,7 @@ let store = createStore(
 )
 
 store
-  .dispatch(fetchPosts())
+  .dispatch(FetchPosts())
   .then(() => {console.log(store.getState())})
 
 render(

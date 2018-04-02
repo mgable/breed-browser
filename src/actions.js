@@ -1,41 +1,8 @@
 import Search from './services.js';
 import _ from 'underscore';
-
-/*
- * action creators
- */
-
-export function submitAnswer(answer) {
-	return { type: SUBMIT_ANSWER, answer }
-}
-
- export function quizReady() {
-	return { type: QUIZ_READY }
-}
-
-export function nextQuestion() {
-	return { type: NEXT_QUESTION }
-}
-
-export function makeQuiz(quiz) {
-	return { type: MAKE_QUIZ, quiz }
-}
-
-export function selectBreed(breed, sub, images) {
-	return { type: SELECT_BREED, breed, sub, images }
-}
-
-export function makeBreedBrowser(breedbrowser) {
-	return {type: MAKE_BREED_BROWSER, breedbrowser}
-}
-
-export function filterBreeds(breed){
-	return {type: FILTER_BREEDS, breed}
-}
-
-var data;	
-
-export function fetchPosts() { 
+	
+const fetchPost = () => { 
+	var data;
 	return function (dispatch) { 
 		//dispatch(getData()) 
 		return _fetchData()
@@ -52,7 +19,6 @@ export function fetchPosts() { 
 		)
 	}
 }
-
 
 
 // breed browser
@@ -104,7 +70,9 @@ const _makeBreedsList = (results) => {
 	return {breeds: _groupByAlpha(results), rawBreedsObj: results}
 }
 
- const _groupByAlpha = (breeds) => {
+const _groupByAlpha = (breeds) => {
+	console.info("the breeds are");
+	console.info(breeds);
 	return _.groupBy(_.map(breeds, (val, key) => {
 		return {name: key, subbreeds: val};
 	}), (item) => {
@@ -227,3 +195,37 @@ export const FILTER_BREEDS = 'FILTER_BREEDS'
 export const SELECT_BREED = 'SELECT_BREED'
 export const STATES = {START: "START", LOADED: "LOADED", FINISH: "FINISH"}
 export const GetBreedImages = _getBreedImages
+export const FetchPosts = fetchPost;
+export const GroupByAlpha = _groupByAlpha;
+
+/*
+ * action creators
+ */
+
+export function submitAnswer(answer) {
+	return { type: SUBMIT_ANSWER, answer }
+}
+
+ export function quizReady() {
+	return { type: QUIZ_READY }
+}
+
+export function nextQuestion() {
+	return { type: NEXT_QUESTION }
+}
+
+export function makeQuiz(quiz) {
+	return { type: MAKE_QUIZ, quiz }
+}
+
+export function selectBreed(breed, sub, images) {
+	return { type: SELECT_BREED, breed, sub, images }
+}
+
+export function makeBreedBrowser(breedbrowser) {
+	return {type: MAKE_BREED_BROWSER, breedbrowser}
+}
+
+export function filterBreeds(term){
+	return {type: FILTER_BREEDS, term}
+}

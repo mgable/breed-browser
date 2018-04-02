@@ -1,10 +1,9 @@
 import React from 'react';
-// import SearchField from './SearchField.js';
 import LineItem from './LineItem';
 import './Browser.css';
 import _ from 'underscore';
 
-const Browser = ({breeds, onChoiceClick}) => {
+const Browser = ({breed, breeds, onChoiceClick}) => {
 	// render(){
 		// return null;
 		// return (
@@ -16,8 +15,8 @@ const Browser = ({breeds, onChoiceClick}) => {
 		// 		</div>
 		// 	</div>
 		// );
-		var index = 0;
-		return _.map(breeds, (breedsList, alpha) => {
+		var index = 0,
+			breedListings = _.map(breeds, (breedsList, alpha) => {
 			index++;
 			return (
 				<ul className="no-bullets" key={index.toString()}>
@@ -26,6 +25,8 @@ const Browser = ({breeds, onChoiceClick}) => {
 				</ul>
 			);
 		});
+
+		return <div className="breed-listing">{breedListings}</div>
 	// }
 }
 

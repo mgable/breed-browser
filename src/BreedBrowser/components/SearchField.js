@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class SearchField extends Component {
 	constructor(props) {
+		console.info("this props for searchfiekd");
+		console.info(props);
 		super(props);
 		this.state = {breed: props.breed};
 		this.clearSearch = this.clearSearch.bind(this);
@@ -11,12 +13,12 @@ class SearchField extends Component {
 	handleChange(event) {
 		var value = event.target.value;
 		this.setState({breed: value});
-		this.props.filterBreeds(value);
+		this.props.onFilterBreeds(value);
 	}
 
 	clearSearch(){
 		this.setState({breed: ""});
-		this.props.filterBreeds("");
+		this.props.onFilterBreeds("");
 	}
 
 	render() {
