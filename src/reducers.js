@@ -40,8 +40,8 @@ const initialStateBreeds = {
 */
 
 function makeQuiz(state, action){
-	state.questions = action.quiz
-	return _.extend({}, state)
+	var questions = action.quiz
+	return _.extend({}, state, {questions})
 }
  
 function quiz(state = initialState, action) {
@@ -96,52 +96,61 @@ function filterBreedsList(state, action){
 		breeds = GroupByAlpha(state.rawBreedsObj)
 	}
 
-	return _.extend({}, state, {breeds: breeds});
+	return _.extend({}, state, {breeds});
 }
 
 function selectBreed(state, action){
-	state.breed = action.breed;
-	state.sub = action.sub;
-	state.images = action.images;
-	return _.extend({}, state);
+	var breed = action.breed,
+		sub = action.sub,
+		images = action.images;
+	return _.extend({}, state, {breed, sub, images});
 }
 
 function makeBreedBrowser(state, action){
-	state.rawBreedsObj = action.breedbrowser.rawBreedsObj;
-	state.breeds = action.breedbrowser.breeds;
-	state.images = action.breedbrowser.images;
-	return _.extend({}, state);
+	var rawBreedsObj = action.breedbrowser.rawBreedsObj,
+		breeds = action.breedbrowser.breeds,
+		images = action.breedbrowser.images;
+	return _.extend({}, state, {rawBreedsObj, breeds, images});
 }
 
 
 function broadcastQuiz(state, action){
-	state.status = STATES.LOADED;
-	return _.extend({}, state);
+	var status = STATES.LOADED;
+	return _.extend({}, state, {status});
 }
 
 
 function checkAnswer(state, action){
-	var question = state.questions[state.currentQuestion]
+	var question = state.questions[state.currentQuestion],
+		correct,
+		wrong;
+
 	question.response = (question.answer === action.answer) ? question.answer : false;
 	if (question.response !== false) {
-		state.correct += 1;
+		correct = state.correct + 1;
+		wrong = state.wrong;
 	} else {
-		state.wrong += 1;
+		correct = state.correct;
+		wrong = state.wrong + 1;
 	}
-	state.currentSelection = action.answer;
-	return _.extend({}, state);
+	var currentSelection = action.answer;
+	return _.extend({}, state, {currentSelection, wrong, correct});
 }
 
 function advanceQuiz(state, action){
+	var currentQuestion,
+		currentSelection,
+		status;
+
 	if (state.currentQuestion < (state.questions.length - 1)){
-		state.currentQuestion += 1;
-		state.currentSelection = null;
+		currentQuestion = state.currentQuestion + 1;
+		currentSelection = null;
 		console.info("next Question");
 	} else {
 		console.info("end");
-		state.status = STATES.FINISH;
+		status = STATES.FINISH;
 	}
-	return _.extend({}, state);
+	return _.extend({}, state, {currentQuestion, currentSelection, status});
 }
 
 
