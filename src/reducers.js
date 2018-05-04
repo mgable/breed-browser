@@ -40,7 +40,8 @@ const initialStateBreeds = {
 */
 
 function makeQuiz(state, action){
-	var questions = action.quiz
+	// state.questions = action.quiz
+	var questions = action.quiz;
 	return _.extend({}, state, {questions})
 }
  
@@ -96,11 +97,11 @@ function filterBreedsList(state, action){
 		breeds = GroupByAlpha(state.rawBreedsObj)
 	}
 
-	return _.extend({}, state, {breeds});
+	return _.extend({}, state, {breeds: breeds});
 }
 
 function selectBreed(state, action){
-	var breed = action.breed,
+	var breed = action.breed, 
 		sub = action.sub,
 		images = action.images;
 	return _.extend({}, state, {breed, sub, images});
@@ -121,36 +122,30 @@ function broadcastQuiz(state, action){
 
 
 function checkAnswer(state, action){
-	var question = state.questions[state.currentQuestion],
-		correct,
-		wrong;
-
+	var question = state.questions[state.currentQuestion]
 	question.response = (question.answer === action.answer) ? question.answer : false;
 	if (question.response !== false) {
-		correct = state.correct + 1;
-		wrong = state.wrong;
+		state.correct += 1;
 	} else {
-		correct = state.correct;
-		wrong = state.wrong + 1;
+		state.wrong += 1;
 	}
-	var currentSelection = action.answer;
-	return _.extend({}, state, {currentSelection, wrong, correct});
+	state.currentSelection = action.answer;
+	return _.extend({}, state);
 }
 
 function advanceQuiz(state, action){
-	var currentQuestion,
-		currentSelection,
-		status;
-
+	var currentQuestion = {}, currentSelection = {}, status = {};
 	if (state.currentQuestion < (state.questions.length - 1)){
 		currentQuestion = state.currentQuestion + 1;
 		currentSelection = null;
 		console.info("next Question");
+		return _.extend({}, state, {currentQuestion, currentSelection});
 	} else {
 		console.info("end");
 		status = STATES.FINISH;
+		return _.extend({}, state, {status});
 	}
-	return _.extend({}, state, {currentQuestion, currentSelection, status});
+	
 }
 
 
