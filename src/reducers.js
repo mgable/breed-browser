@@ -108,6 +108,8 @@ function selectBreed(state, action){
 }
 
 function makeBreedBrowser(state, action){
+	console.info("I am makeing the breeed browser");
+	console.info(state, action);
 	var rawBreedsObj = action.breedbrowser.rawBreedsObj,
 		breeds = action.breedbrowser.breeds,
 		images = action.breedbrowser.images;

@@ -1,30 +1,10 @@
 import Search from './services.js';
 import _ from 'underscore';
 	
-const fetchPost = () => { 
-	var data;
-	return function (dispatch) { 
-		//dispatch(getData()) 
-		return _fetchData()
-		.then(
-			response => {data = response; return _makeBreedBrowser(response.message)},
-			error => console.log('An error occurred.', error)
-		).then(
-			json => { dispatch(makeBreedBrowser(json)) }
-		).then(
-			response => _makeQuiz(data),
-			error => console.log('An error occurred.', error)
-		).then(
-			json => { dispatch(makeQuiz(json));dispatch(quizReady()) }
-		)
-	}
-}
-
-
 // breed browser
 const HOWMANY = 12;
 
-const _fetchData = () => {
+export const fetchData = () => {
 	return new Promise((resolve, reject) => {
 		Search.getBreeds().then((response) => {
 			resolve (response)
@@ -34,7 +14,7 @@ const _fetchData = () => {
 	});
 }
 
-const _makeBreedBrowser = (breeds) => {
+export const makeBreedBrowser = (breeds) => {
 	var promises = [_makeBreedsList(breeds), _getBreedImages(null, null)];
 	return Promise.all(promises).then((response) => {
 		let results = _.extend({}, response[0], {images: response[1]});
@@ -119,8 +99,7 @@ const _pickRandomBreed = (_rawBreedsList, howMany = 1, omit) => {
 
 
 // quiz
-
- const _makeQuiz = (breeds) => {
+export const makeQuiz = (breeds) => {
 	return new Promise((resolve, reject) => {
 		var quiz = [], numOfQuestions = 4,
 			rawBreedsList = Object.keys(breeds.message);
@@ -201,24 +180,12 @@ export function submitAnswer(answer) {
 	return { type: SUBMIT_ANSWER, answer }
 }
 
-export function quizReady() {
-	return { type: QUIZ_READY }
-}
-
 export function nextQuestion() {
 	return { type: NEXT_QUESTION }
 }
 
-export function makeQuiz(quiz) {
-	return { type: MAKE_QUIZ, quiz }
-}
-
 export function selectBreed(breed, sub, images) {
 	return { type: SELECT_BREED, breed, sub, images }
-}
-
-export function makeBreedBrowser(breedbrowser) {
-	return {type: MAKE_BREED_BROWSER, breedbrowser}
 }
 
 export function filterBreeds(term){
@@ -230,5 +197,4 @@ export function filterBreeds(term){
  */
 
 export const GetBreedImages = _getBreedImages
-export const FetchPosts = fetchPost;
 export const GroupByAlpha = _groupByAlpha;

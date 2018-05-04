@@ -1,24 +1,30 @@
-import thunkMiddleware from 'redux-thunk'
+//import thunkMiddleware from 'redux-thunk'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga  from './sagas.js'
 import reducers from './reducers'
 import App from './App'
-import { FetchPosts } from './actions'
 import './registerServiceWorker';
 import './index.css';
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 let store = createStore(
   reducers,
   applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
+    sagaMiddleware
   )
 )
 
-store
-  .dispatch(FetchPosts())
-  .then(() => {console.log(store.getState())})
+// store
+//   .dispatch(FetchPosts())
+//   .then(() => {console.log(store.getState())})
+
+sagaMiddleware.run(rootSaga)
 
 render(
   <Provider store={store}>
